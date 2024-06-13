@@ -26,4 +26,4 @@ Object.is(NaN, NaN); // true
 [0].includes(-0); // true
 ```
 
-这三种算法解决的问题不一样，使用场景下也就不一样，一般来说，如果不会存在 NaN，那就用 `===`；有 NaN，就用 SameValueZero；要严格区分 `+0` 和 `-0` 时，就用 `SameValue`。
+这三种算法解决的问题不一样，使用场景下也就不一样，一般来说，如果不比较 NaN，那就用 `===`；如果要比较 NaN，就用 SameValueZero；如果要严格区分 `+0` 和 `-0`，就用 `SameValue`。
