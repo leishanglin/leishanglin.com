@@ -14,3 +14,5 @@ Number.isNaN("NaN"); // false
 ```
 
 在 JavaScript 中，“隐式类型转换”存在诸多弊端，所以推荐使用 `Number.isNaN`，不建议使用 `isNaN`。
+
+`NaN` 是 JavaScript 中**唯一**一个不等于自身的值，所以，也可以这样判断：`a !== a`，如果返回 `true`，说明 `a` 就是 `NaN`。
