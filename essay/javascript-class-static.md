@@ -1,13 +1,13 @@
-# JavaScript：class 的静态属性和静态方法
+# JavaScript：静态属性和静态方法
 
-直接通过“类”进行调用的属性或方法，被称为“静态属性”或“静态方法”：
+直接通过“类”进行调用的属性或方法，称为“静态属性”或“静态方法”：
 
 ```ts
 Math.abs(-1); // 1
 Math.PI; // 3.141592653589793
 ```
 
-Math 是一个类（构造函数），而函数同时也是**对象**，所以可以直接挂载属性和方法，这是静态属性和静态方法可以实现的前提。
+上面例子中，Math 是一个类（构造函数），而类同时也是一个**对象**，所以可以直接在类上添加属性和方法，这是静态属性和静态方法可以实现的前提。
 
 在 class 写法中，静态属性和静态方法用 `static` 修饰符定义：
 
@@ -28,7 +28,7 @@ Counter.version; // '1.0.0'
 Counter.getName(); // 'Counter'
 ```
 
-它等同于以下 ES5 写法：
+如果不用 `static`，可以将它们写在外面，效果是一样的：
 
 ```js
 function Counter() {
@@ -86,4 +86,34 @@ const counter = new Counter();
 counter.getName(); // Error: counter.getName is not a function
 ```
 
-这里 `counter.getName()` 报错，说明直接定义在 Counter “对象”上的属性或方法不会被实例继承。
+这里 `counter.getName()` 报错，说明直接定义在 Counter “对象”上的属性或方法不会被实例继承，因此不能被实例引用。
+
+## 会被子类继承
+
+虽然不能被实例继承，但静态方法和静态属性可以被子类“继承”：
+
+```js
+class CounterV2 extends Counter {}
+
+console.log(CounterV2.version); // '1.0.0'
+console.log(CounterV2.getName()); // 'CounterV2'
+```
+
+也可以被子类改写和新增：
+
+```js
+class CounterV2 extends Counter {
+  static version = "2.0.0";
+
+  static getName() {
+    return super.getName().toUpperCase();
+  }
+
+  // 子类新增的静态属性
+  static foo = "FOO";
+}
+
+CounterV2.version; // '2.0.0'
+CounterV2.getName(); // 'COUNTERV2'
+CounterV2.foo; // 'FOO'
+```
