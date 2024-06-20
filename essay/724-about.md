@@ -9,3 +9,27 @@
 它不是什么低代码或零代码平台，而是一个以“快速生成应用”并且支持源码导出的“工具”。
 
 下面模拟一下用户的操作步骤：
+
+获取 project 列表
+创建 project
+删除 project
+更新 project 信息
+
+获取项目中的 table 列表
+创建 table
+删除 table
+更新 table 信息
+
+获取 table 中的 column 列表
+创建 column
+删除 column
+更新 column 信息
+
+生成或更新 table
+新增数据
+从 excel 导入
+填充 mock 数据
+修改数据
+导出为 excel
+删除单条数据
+删除多条数据
