@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec vite-node ./scripts/build.ts"
+    "dev": "nodemon --exec vite-node ./scripts/build.ts",
+    "format": "prettier --write 'dist/**/*.html'",
+    "compile":"vite-node ./scripts/build.ts",
+    "build": "run-s compile format"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
@@ -15,6 +18,8 @@
     "gray-matter": "^4.0.3",
     "marked": "^15.0.7",
     "nodemon": "^3.1.7",
+    "npm-run-all2": "^7.0.2",
+    "prettier": "^3.5.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.0",
     "vite-node": "^2.1.6"
