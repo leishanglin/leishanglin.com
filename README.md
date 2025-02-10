@@ -1,3 +1,4 @@
-# Notes
+# leishanglin.com
 
-存放我的笔记。
+Store my tech-notes, Visit: [https://leishanglin.com/](https://leishanglin.com/)
+
