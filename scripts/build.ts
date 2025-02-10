@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import * as fs from 'node:fs/promises';
 import { emptyDir } from 'fs-extra';
 import ejs from 'ejs';
+import { minify } from 'html-minifier-terser';
 
 const filesMap = await loadDir(path.resolve(__dirname, '../notes'));
 const prefixPath = path.resolve(__dirname, '../dist');
@@ -29,9 +30,18 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
       path.resolve(__dirname, './index.html.ejs'),
       { noteHtml: rawHtml },
     );
+
+    const minifiedRawHtml = await minify(renderedRawHtml, {
+      collapseWhitespace: true,   // 删除多余空格
+      removeComments: true,       // 删除注释
+      removeRedundantAttributes: true, // 移除冗余属性
+      removeEmptyAttributes: true, // 删除空属性
+      minifyCSS: true, // 压缩 CSS
+      minifyJS: true, // 压缩 JS 代码
+    })
     fs.writeFile(
       fileFullPath.replace(/\.md$/, '.html'),
-      renderedRawHtml,
+      minifiedRawHtml,
       'utf-8',
     );
   } else {
