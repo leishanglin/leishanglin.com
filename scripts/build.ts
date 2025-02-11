@@ -25,20 +25,29 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
 
   if (fileFullPath.endsWith('.md')) {
     const dataObj = matter(content);
-    const rawHtml = marked.marked(dataObj.content, {}) as string;
+
+    const renderer = new marked.Renderer();
+    renderer.image = (image: marked.Tokens.Image): string => {
+      // 添加语义化标签：figure，并让图片进行懒加载（loading="lazy"）
+      return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
+    };
+    
+    marked.setOptions({ renderer });
+
+    const rawHtml = marked.parse(dataObj.content, {}) as string;
     const renderedRawHtml = await ejs.renderFile(
       path.resolve(__dirname, './index.html.ejs'),
-      { noteHtml: rawHtml },
+      { content: rawHtml, author: 'leishanglin(雷尚林)', ...dataObj.data },
     );
 
     const minifiedRawHtml = await minify(renderedRawHtml, {
-      collapseWhitespace: true,   // 删除多余空格
-      removeComments: true,       // 删除注释
+      collapseWhitespace: true, // 删除多余空格
+      removeComments: true, // 删除注释
       removeRedundantAttributes: true, // 移除冗余属性
       removeEmptyAttributes: true, // 删除空属性
       minifyCSS: true, // 压缩 CSS
       minifyJS: true, // 压缩 JS 代码
-    })
+    });
     fs.writeFile(
       fileFullPath.replace(/\.md$/, '.html'),
       minifiedRawHtml,

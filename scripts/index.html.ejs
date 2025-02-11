@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- 标题（尽量包含主关键词，且控制在 60 个字符以内） -->
-    <title><%= title %> - <%= keywords %></title>
+    <title><%= title %></title>
 
     <!-- 关键词（现代搜索引擎主要依赖内容，但仍可参考） -->
     <meta name="keywords" content="<%= keywords %>" />
@@ -22,7 +22,7 @@
     <meta name="robots" content="index, follow" />
 
     <!-- 作者信息，虽然不是SEO的核心因素，但有助于展示页面内容的来源 -->
-    <meta name="author" content="leishanglin(雷尚林)" />
+    <meta name="author" content="<%= author %>" />
 
     <!-- Canonical URL（避免重复内容被搜索引擎误判） -->
     <link rel="canonical" href="https://www.example.com/your-page-url" />
@@ -42,13 +42,13 @@
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "网页标题 - 关键词",
-        "description": "网页的简要描述，便于搜索引擎理解",
-        "url": "https://example.com/",
-        "image": "https://example.com/your-image.jpg",
+        "name": "<%= title %>",
+        "description": "<%= description %>",
+        "url": "https://leishanglin.com/",
+        "image": "https://leishanglin.com/images/foreground.png",
         "author": {
           "@type": "Person",
-          "name": "leishanglin(雷尚林)"
+          "name": "<%= author %>"
         }
       }
     </script>
