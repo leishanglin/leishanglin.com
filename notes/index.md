@@ -6,5 +6,3 @@ description: 这是 leishanglin 的个人网站，用于个人博客、简历、
 # leishanglin.com
 
 这是我的个人网站
-
-![图片test](./images/image.png)

@@ -24,32 +24,54 @@
     <!-- 作者信息，虽然不是SEO的核心因素，但有助于展示页面内容的来源 -->
     <meta name="author" content="<%= author %>" />
 
-    <!-- Canonical URL（避免重复内容被搜索引擎误判） -->
-    <link rel="canonical" href="https://www.example.com/your-page-url" />
+    <!-- Canonical URL（避免重复内容被搜索引擎误判，以此告诉搜索引擎，这份内容的“正版”来源URL是这个，避免权重分散） -->
+    <link rel="canonical" href="<%= domain %><%= path %>" />
 
     <!-- Open Graph (Facebook, Twitter, LinkedIn) -->
     <meta property="og:title" content="<%= title %>" />
     <meta property="og:description" content="<%= description %>" />
-    <meta property="og:image" content="https://example.com/your-image.jpg" />
-    <meta property="og:url" content="https://example.com/" />
+    <meta
+      property="og:image"
+      content="<%= domain %>/images/large-favicon.png"
+    />
+    <meta property="og:url" content="<%= domain %><%= path %>" />
     <meta property="og:type" content="website" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <!-- 苹果 iOS 设备的桌面图标不支持 SVG，因此使用 png -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/large-favicon.png"
+    />
 
     <!-- 结构化数据（JSON-LD） -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
+        "@type": "Article",
+        "headline": "<%= title %>",
         "name": "<%= title %>",
         "description": "<%= description %>",
-        "url": "https://leishanglin.com/",
-        "image": "https://leishanglin.com/images/foreground.png",
+        "url": "<%= domain %><%= path %>",
+        "image": "<%= domain %>/images/large-favicon.png",
         "author": {
           "@type": "Person",
           "name": "<%= author %>"
-        }
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "<%= author %>",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "<%= domain %>/images/large-favicon.png"
+          }
+        },
+        "datePublished": "<%= datePublished %>",
+        "dateModified": "<%= dateModified %>"
       }
     </script>
 
@@ -67,9 +89,9 @@
       <!-- Logo链接到首页，使用alt属性为图片添加描述，提升可访问性和SEO -->
       <a href="/">
         <img
-          src="logo.png"
-          alt="网站Logo - SEO优化的HTML模板"
-          title="返回首页"
+          src="/images/logo.svg"
+          alt="网站的 Logo 图片"
+          title="首页"
         />
         <h1><%= title %></h1>
       </a>
@@ -78,9 +100,9 @@
       <nav>
         <ul>
           <li><a href="/" title="首页">首页</a></li>
-          <li><a href="/about" title="关于我们">关于我们</a></li>
-          <li><a href="/services" title="服务">服务</a></li>
-          <li><a href="/contact" title="联系我们">联系我们</a></li>
+          <li><a href="/" title="关于我们">关于我们</a></li>
+          <li><a href="/" title="服务">服务</a></li>
+          <li><a href="/" title="联系我们">联系我们</a></li>
         </ul>
       </nav>
     </header>
