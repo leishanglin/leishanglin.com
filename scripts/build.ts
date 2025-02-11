@@ -7,11 +7,12 @@ import { emptyDir } from 'fs-extra';
 import ejs from 'ejs';
 import { minify } from 'html-minifier-terser';
 import dayjs from 'dayjs';
+import { SitemapStream, streamToPromise } from 'sitemap';
 
 const NOTES_DIR = '../notes';
 const DIST_DIR = '../dist';
 const AUTHOR = 'leishanglin(雷尚林)';
-const DOMAIN_NAME = "leishanglin.com"
+const DOMAIN_NAME = 'leishanglin.com';
 // const DOMAIN = 'https://leishanglin.com';
 const DOMAIN = 'http://127.0.0.1:8083';
 
@@ -21,6 +22,13 @@ const prefixPath = path.resolve(__dirname, DIST_DIR);
 const dirCheckMap: Record<string, boolean> = {};
 
 await emptyDir(prefixPath);
+
+const sites: {
+  url: string;
+  changefreq: 'daily' | 'weekly' | 'monthly';
+  lastmod: string;
+  priority: number;
+}[] = [];
 
 for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   const fileOriginFullPath = path.resolve(
@@ -78,7 +86,31 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
       minifiedRawHtml,
       'utf-8',
     );
+    sites.push({
+      url: `${DOMAIN}/${fileRelativePath.replace(/\.md$/, '')}`,
+      changefreq: 'daily',
+      lastmod: dayjs(updatedAt).format('YYYY-MM-DD'),
+      priority: 1.0,
+    });
   } else {
     fs.writeFile(fileFullPath, content);
   }
 }
+
+fs.writeFile(
+  path.resolve(prefixPath, 'robots.txt'),
+  await ejs.renderFile(
+    path.resolve(process.cwd(), './scripts/robots.txt.ejs'),
+    {
+      domain: DOMAIN,
+    },
+  ),
+);
+
+const sitemap = new SitemapStream({ hostname: DOMAIN });
+sites.forEach((site) => {
+  sitemap.write(site);
+});
+sitemap.end();
+const sitemapXml = await streamToPromise(sitemap);
+fs.writeFile(path.resolve(prefixPath, 'sitemap.xml'), sitemapXml);
