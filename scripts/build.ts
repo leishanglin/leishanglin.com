@@ -59,6 +59,10 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     const fileStat = await fs.stat(fileOriginFullPath);
     const createdAt = fileStat.birthtime;
     const updatedAt = fileStat.mtime;
+    let htmlPath = `/${fileRelativePath.replace(/\.md$/, '')}`;
+    if (htmlPath.endsWith('/index')) {
+      htmlPath = htmlPath.replace(/\/index$/, '');
+    }
     const renderedRawHtml = await ejs.renderFile(
       path.resolve(__dirname, './index.html.ejs'),
       {
@@ -67,7 +71,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         ...dataObj.data,
         domain: DOMAIN,
         domainName: DOMAIN_NAME,
-        path: `/${fileRelativePath.replace(/\.md$/, '')}`,
+        path: htmlPath,
         datePublished: dayjs(createdAt).format('YYYY-MM-DD'),
         dateModified: dayjs(updatedAt).format('YYYY-MM-DD'),
       },
@@ -87,8 +91,8 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
       'utf-8',
     );
     sites.push({
-      url: `${DOMAIN}/${fileRelativePath.replace(/\.md$/, '')}`,
-      changefreq: 'daily',
+      url: `${DOMAIN}${htmlPath}`,
+      changefreq: 'monthly',
       lastmod: dayjs(updatedAt).format('YYYY-MM-DD'),
       priority: 1.0,
     });
