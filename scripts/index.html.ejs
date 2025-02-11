@@ -1,23 +1,41 @@
 <!DOCTYPE html>
+<!-- 使用HTML5的DOCTYPE声明，确保浏览器以标准模式渲染页面 -->
+<!-- 设置html标签的lang属性，指定页面内容的语言为中文（简体），有助于搜索引擎理解页面内容的目标受众 -->
 <html lang="zh-CN">
   <head>
+    <!-- 指定字符集，确保搜索引擎正确解析 -->
     <meta charset="UTF-8" />
+
+    <!-- 设置viewport，确保页面在移动设备上正确显示，提升移动端用户体验 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="这里是网页的简要描述，建议 150-160 字符，包含核心关键词"
-    />
-    <meta name="keywords" content="关键词1, 关键词2, 关键词3" />
-    <meta name="author" content="leishanglin(雷尚林)" />
-    <meta name="robots" content="index, follow" />
+
+    <!-- 标题（尽量包含主关键词，且控制在 60 个字符以内） -->
+    <title><%= title %> - <%= keywords %></title>
+
+    <!-- 关键词（现代搜索引擎主要依赖内容，但仍可参考） -->
+    <meta name="keywords" content="<%= keywords %>" />
+
+    <!-- 页面描述（搜索引擎 SERP 结果会展示，建议 150 字以内，包含核心关键词） -->
+    <meta name="description" content="<%= description %>" />
+
     <!-- 允许搜索引擎索引和跟随链接 -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- 作者信息，虽然不是SEO的核心因素，但有助于展示页面内容的来源 -->
+    <meta name="author" content="leishanglin(雷尚林)" />
+
+    <!-- Canonical URL（避免重复内容被搜索引擎误判） -->
+    <link rel="canonical" href="https://www.example.com/your-page-url" />
 
     <!-- Open Graph (Facebook, Twitter, LinkedIn) -->
-    <meta property="og:title" content="网页标题 - 关键词" />
-    <meta property="og:description" content="网页的简要描述，适用于社交分享" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta property="og:description" content="<%= description %>" />
     <meta property="og:image" content="https://example.com/your-image.jpg" />
     <meta property="og:url" content="https://example.com/" />
     <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
 
     <!-- 结构化数据（JSON-LD） -->
     <script type="application/ld+json">
@@ -27,26 +45,61 @@
         "name": "网页标题 - 关键词",
         "description": "网页的简要描述，便于搜索引擎理解",
         "url": "https://example.com/",
-        "image": "https://example.com/your-image.jpg"
+        "image": "https://example.com/your-image.jpg",
+        "author": {
+          "@type": "Person",
+          "name": "leishanglin(雷尚林)"
+        }
       }
     </script>
 
-    <title>网页标题 - 关键词</title>
-
     <!-- 预加载关键资源 -->
-    <link rel="preload" href="style.css" as="style" />
-    <link rel="preload" href="script.js" as="script" />
+    <link rel="preload" href="/styles/index.css" as="style" />
+    <link rel="preload" href="/scripts/index.js" as="script" />
 
     <!-- 样式表 -->
-    <link rel="stylesheet" href="style.css" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/index.css" />
   </head>
 
   <body>
-<%- noteHtml %>
-    <script src="script.js" defer></script>
+    <!-- 使用语义化标签（header），帮助搜索引擎理解页面结构 -->
+    <header>
+      <!-- Logo链接到首页，使用alt属性为图片添加描述，提升可访问性和SEO -->
+      <a href="/">
+        <img
+          src="logo.png"
+          alt="网站Logo - SEO优化的HTML模板"
+          title="返回首页"
+        />
+        <h1><%= title %></h1>
+      </a>
+
+      <!-- 导航栏使用nav标签，帮助搜索引擎识别导航内容 -->
+      <nav>
+        <ul>
+          <li><a href="/" title="首页">首页</a></li>
+          <li><a href="/about" title="关于我们">关于我们</a></li>
+          <li><a href="/services" title="服务">服务</a></li>
+          <li><a href="/contact" title="联系我们">联系我们</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 使用main标签包裹主要内容，帮助搜索引擎识别页面的核心内容 -->
+    <main>
+      <article><%- content %></article>
+    </main>
+
+    <!-- 使用footer标签包裹页脚内容，帮助搜索引擎识别页脚信息 -->
+    <footer>
+      <p>&copy; 2023 Your Company. All rights reserved.</p>
+      <p>
+        <a href="/privacy-policy" title="隐私政策">隐私政策</a> |
+        <a href="/terms-of-service" title="服务条款">服务条款</a>
+      </p>
+    </footer>
+
     <!-- defer 避免阻塞 -->
+    <script src="/scripts/index.js" defer></script>
   </body>
 </html>
