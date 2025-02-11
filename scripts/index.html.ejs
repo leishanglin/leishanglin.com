@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- 标题（尽量包含主关键词，且控制在 60 个字符以内） -->
-    <title><%= title %></title>
+    <title><%= title %> | <%= domainName %></title>
 
     <!-- 关键词（现代搜索引擎主要依赖内容，但仍可参考） -->
     <meta name="keywords" content="<%= keywords %>" />
@@ -88,11 +88,7 @@
     <header>
       <!-- Logo链接到首页，使用alt属性为图片添加描述，提升可访问性和SEO -->
       <a href="/">
-        <img
-          src="/images/logo.svg"
-          alt="网站的 Logo 图片"
-          title="首页"
-        />
+        <img src="/images/logo.svg" alt="网站的 Logo 图片" title="首页" />
         <h1><%= title %></h1>
       </a>
 
@@ -109,7 +105,13 @@
 
     <!-- 使用main标签包裹主要内容，帮助搜索引擎识别页面的核心内容 -->
     <main>
-      <article><%- content %></article>
+      <article>
+        <h1><%= title %></h1>
+        <p>更新于：<time datetime="<%= datePublished %>"><%= datePublished %></time></p>
+        <p>创建于：<time datetime="<%= datePublished %>"><%= datePublished %></time></p>
+
+        <%- content %>
+      </article>
     </main>
 
     <!-- 使用footer标签包裹页脚内容，帮助搜索引擎识别页脚信息 -->
