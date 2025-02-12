@@ -130,4 +130,4 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-.DS_STORE
+.DS_Store
