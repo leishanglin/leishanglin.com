@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec vite-node ./scripts/build.ts",
-    "compile": "vite-node ./scripts/build.ts",
+    "build": "vite-node ./scripts/build.ts",
     "seo": "lighthouse http://127.0.0.1:8083 --only-categories=seo"
   },
   "devDependencies": {

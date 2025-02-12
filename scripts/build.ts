@@ -14,8 +14,8 @@ const NOTES_DIR = `../${NOTES_FOLDER_NAME}`;
 const DIST_DIR = '../dist';
 const AUTHOR = 'leishanglin(雷尚林)';
 const DOMAIN_NAME = 'leishanglin.com';
-// const DOMAIN = 'https://leishanglin.com';
-const DOMAIN = 'http://127.0.0.1:8083';
+const DOMAIN = 'https://leishanglin.com';
+// const DOMAIN = 'http://127.0.0.1:8083';
 const GITHUB_NAME = 'https://github.com/leishanglin';
 const REPO_NAME = 'leishanglin.com';
 
@@ -135,8 +135,8 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     });
     fs.writeFile(
       fileFullPath.replace(/\.md$/, '.html'),
-      // minifiedRawHtml,
-      renderedRawHtml,
+      minifiedRawHtml,
+      // renderedRawHtml,
       'utf-8',
     );
     sites.push({
