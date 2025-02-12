@@ -37,7 +37,7 @@ html {
 /* 页面主体样式 */
 #pageMain {
   padding-top: 56px;
-  min-height: calc(100vh - 112px);
+  min-height: calc(100vh - 56px);
 }
 
 /* 页脚样式 */
