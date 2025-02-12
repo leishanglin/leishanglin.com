@@ -25,11 +25,11 @@ await emptyDir(prefixPath);
 
 const changefreqPriorityMap = <const>{
   hourly: 1.0,
-  daily: 0.9,
-  weekly: 0.7,
-  monthly: 0.5,
-  yearly: 0.3,
-  never: 0.1,
+  daily: 1.0,
+  weekly: 0.8,
+  monthly: 0.6,
+  yearly: 0.4,
+  never: 0.2,
 };
 const changefreqKeys = Object.keys(changefreqPriorityMap);
 const markdownMetaDataKeys = ['title', 'keywords', 'description', 'changefreq'];

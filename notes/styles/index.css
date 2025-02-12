@@ -2,3 +2,37 @@ pre code.hljs {
   /* github-markdown.min.css 中已经定义了外层的内边距，这里就不用定义了 */
   padding: 0;
 }
+
+#pageHeader {
+  height: 56px;
+}
+
+/* 页面主体样式 */
+#pageMain {
+  min-height: calc(100vh - 112px);
+}
+
+/* 页脚样式 */
+#pageFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  height: 56px;
+  padding-bottom: 10px;
+}
+
+#pageFooter .copyright {
+  margin: 0;
+}
+
+#pageFooter,
+#pageFooter a {
+  color: var(--fgColor-muted);
+  text-decoration: none;
+}
+#pageFooter a:hover {
+  color: var(--fgColor-default);
+  text-decoration: underline;
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 使用HTML5的DOCTYPE声明，确保浏览器以标准模式渲染页面 -->
 <!-- 设置html标签的lang属性，指定页面内容的语言为中文（简体），有助于搜索引擎理解页面内容的目标受众 -->
-<html lang="zh-CN" style="font-size: 16px">
+<html lang="zh-CN" style="font-size: 16px" data-theme="light">
   <head>
     <!-- 指定字符集，确保搜索引擎正确解析 -->
     <meta charset="UTF-8" />
@@ -83,16 +83,25 @@
     <!-- 样式表 -->
     <link rel="stylesheet" href="/styles/github-markdown.min.css" />
 
-<% if(hasCodeBlock) { %>
+    <% if(hasCodeBlock) { %>
     <!-- 代码块高亮样式 -->
     <link rel="stylesheet" href="/styles/hljs-theme-github.min.css" />
     <!-- <link rel="stylesheet" href="/styles/hljs-theme-github-dark.min.css" /> -->
-<% } %>
+    <% } %>
 
     <!-- 注意顺序，用于定义一些自定义组件的样式，以及重置一些前面加载的样式表的一些默认样式 -->
     <link rel="stylesheet" href="/styles/index.css" />
 
     <style>
+      body {
+        margin: 0;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
       .markdown-body {
         box-sizing: border-box;
         min-width: 200px;
@@ -111,7 +120,8 @@
 
   <body>
     <!-- 使用语义化标签（header），帮助搜索引擎理解页面结构 -->
-    <header>
+    <header id="pageHeader">
+      1
       <!-- Logo链接到首页，使用alt属性为图片添加描述，提升可访问性和SEO -->
       <!-- <a href="/">
         <img src="/images/logo.svg" alt="网站的 Logo 图片" title="首页" />
@@ -130,7 +140,7 @@
     </header>
 
     <!-- 使用main标签包裹主要内容，帮助搜索引擎识别页面的核心内容 -->
-    <main>
+    <main id="pageMain">
       <article class="markdown-body">
         <h1><%= title %></h1>
         <p>
@@ -149,23 +159,33 @@
     </main>
 
     <!-- 使用footer标签包裹页脚内容，帮助搜索引擎识别页脚信息 -->
-    <footer>
-      <p>
-        &copy; 2023 Your Company. All rights reserved.
-        <!-- nofollow 可以防止搜索引擎传递权重 -->
-        <a href="https://external-site.com" rel="nofollow">External Link</a>
+    <!-- 注意: nofollow 可以防止搜索引擎传递权重 -->
+    <footer id="pageFooter">
+      <p class="copyright">
+        &copy; 2025
+        <a
+          class="author"
+          target="_blank"
+          href="https://github.com/leishanglin"
+          rel="nofollow"
+          >leishanglin</a
+        >. All rights reserved.
       </p>
 
-      <p>
-        <a href="/privacy-policy" title="隐私政策">隐私政策</a> |
-        <a href="/terms-of-service" title="服务条款">服务条款</a>
-      </p>
+      <a
+        class="beian"
+        href="https://beian.miit.gov.cn/"
+        rel="nofollow"
+        target="_blank"
+      >
+        蜀ICP备19033276号
+      </a>
     </footer>
 
     <!-- defer 避免阻塞 -->
     <script src="/scripts/index.js"></script>
 
-<% if(hasCodeBlock) { %>
+    <% if(hasCodeBlock) { %>
     <!-- 代码块语法高亮 -->
     <script src="/scripts/highlight.min.js"></script>
     <script>
@@ -173,6 +193,6 @@
         hljs.highlightAll();
       });
     </script>
-<% } %>
+    <% } %>
   </body>
 </html>
