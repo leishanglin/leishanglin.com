@@ -23,11 +23,25 @@ const dirCheckMap: Record<string, boolean> = {};
 
 await emptyDir(prefixPath);
 
+const changefreqPriorityMap = <const>{
+  hourly: 1.0,
+  daily: 0.9,
+  weekly: 0.7,
+  monthly: 0.5,
+  yearly: 0.3,
+  never: 0.1,
+};
+const changefreqKeys = Object.keys(changefreqPriorityMap);
+const markdownMetaDataKeys = ['title', 'keywords', 'description', 'changefreq'];
+
+type ChangefreqType = keyof typeof changefreqPriorityMap;
+type PriorityType = (typeof changefreqPriorityMap)[ChangefreqType];
+
 const sites: {
   url: string;
-  changefreq: 'daily' | 'weekly' | 'monthly';
+  changefreq: ChangefreqType;
   lastmod: string;
-  priority: number;
+  priority: PriorityType;
 }[] = [];
 
 for (const [fileRelativePath, content] of Object.entries(filesMap)) {
@@ -47,10 +61,36 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   if (fileFullPath.endsWith('.md')) {
     const dataObj = matter(content);
 
+    // 校验 markdown 中的元数据是否“完整”
+    const isKeyValid = markdownMetaDataKeys.every((item) =>
+      Object.keys(dataObj.data).includes(item),
+    );
+    if (!isKeyValid) {
+      throw new Error(
+        'Markdown 中必须含有这些元数据：title, keywords, description, changefreq',
+      );
+    }
+
+    // 校验 changefreq 字段值是否“正确”
+    const isChangefreqValid = changefreqKeys.includes(dataObj.data.changefreq);
+    if (!isChangefreqValid) {
+      throw new Error(
+        `changefreq 字段不对，只能在这几个中选：${changefreqKeys.join(', ')}`,
+      );
+    }
+
     const renderer = new marked.Renderer();
+
+    // 自定义图片渲染逻辑
     renderer.image = (image: marked.Tokens.Image): string => {
       // 添加语义化标签：figure，并让图片进行懒加载（loading="lazy"）
       return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
+    };
+    let hasCodeBlock = false;
+    // 自定义代码块渲染逻辑
+    renderer.code = (config: marked.Tokens.Code): string => {
+      hasCodeBlock = true;
+      return marked.Renderer.prototype.code.call(this, config);
     };
 
     marked.setOptions({ renderer });
@@ -61,7 +101,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     const updatedAt = fileStat.mtime;
     let htmlPath = `/${fileRelativePath.replace(/\.md$/, '')}`;
     if (htmlPath.endsWith('/index')) {
-      htmlPath = htmlPath.replace(/\/index$/, '');
+      htmlPath = htmlPath.replace(/\/index$/, '/');
     }
     const renderedRawHtml = await ejs.renderFile(
       path.resolve(__dirname, './index.html.ejs'),
@@ -74,6 +114,8 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         path: htmlPath,
         datePublished: dayjs(createdAt).format('YYYY-MM-DD'),
         dateModified: dayjs(updatedAt).format('YYYY-MM-DD'),
+        // highlight.js 等资源比较大，且只用在代码块中，所以传入一个判断是否存在代码块的属性，这样就可以做到“只在文档中存在代码块时才加载 highlight.js 相关的资源文件
+        hasCodeBlock, 
       },
     );
 
@@ -87,14 +129,16 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     });
     fs.writeFile(
       fileFullPath.replace(/\.md$/, '.html'),
-      minifiedRawHtml,
+      // minifiedRawHtml,
+      renderedRawHtml,
       'utf-8',
     );
     sites.push({
       url: `${DOMAIN}${htmlPath}`,
-      changefreq: 'monthly',
+      changefreq: dataObj.data.changefreq,
       lastmod: dayjs(updatedAt).format('YYYY-MM-DD'),
-      priority: 1.0,
+      priority:
+        changefreqPriorityMap[dataObj.data.changefreq as ChangefreqType],
     });
   } else {
     fs.writeFile(fileFullPath, content);

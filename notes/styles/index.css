@@ -1,9 +1,4 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 14px;
+pre code.hljs {
+  /* github-markdown.min.css 中已经定义了外层的内边距，这里就不用定义了 */
+  padding: 0;
 }
