@@ -3,12 +3,40 @@ pre code.hljs {
   padding: 0;
 }
 
+html {
+  background-color: var(--bgColor-default);
+}
+
+/* 页面头部样式 */
 #pageHeader {
   height: 56px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  padding: 0 20px;
+  backdrop-filter: blur(8px);
+}
+#pageHeader .logo-title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+#pageHeader .logo-title .logo {
+  width: 32px;
+  height: 32px;
+}
+#pageHeader .logo-title {
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--fgColor-default);
+  font-size: 1.25rem;
 }
 
 /* 页面主体样式 */
 #pageMain {
+  padding-top: 56px;
   min-height: calc(100vh - 112px);
 }
 
@@ -35,4 +63,9 @@ pre code.hljs {
 #pageFooter a:hover {
   color: var(--fgColor-default);
   text-decoration: underline;
+}
+
+/* 右上角 fork me 缎带样式 */
+.github-fork-ribbon:before {
+  background-color: var(--fgColor-default);
 }

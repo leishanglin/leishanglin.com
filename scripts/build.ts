@@ -9,12 +9,15 @@ import { minify } from 'html-minifier-terser';
 import dayjs from 'dayjs';
 import { SitemapStream, streamToPromise } from 'sitemap';
 
-const NOTES_DIR = '../notes';
+const NOTES_FOLDER_NAME = 'notes';
+const NOTES_DIR = `../${NOTES_FOLDER_NAME}`;
 const DIST_DIR = '../dist';
 const AUTHOR = 'leishanglin(雷尚林)';
 const DOMAIN_NAME = 'leishanglin.com';
 // const DOMAIN = 'https://leishanglin.com';
 const DOMAIN = 'http://127.0.0.1:8083';
+const GITHUB_NAME = 'https://github.com/leishanglin';
+const REPO_NAME = 'leishanglin.com';
 
 const filesMap = await loadDir(path.resolve(__dirname, NOTES_DIR));
 const prefixPath = path.resolve(__dirname, DIST_DIR);
@@ -115,7 +118,10 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         datePublished: dayjs(createdAt).format('YYYY-MM-DD'),
         dateModified: dayjs(updatedAt).format('YYYY-MM-DD'),
         // highlight.js 等资源比较大，且只用在代码块中，所以传入一个判断是否存在代码块的属性，这样就可以做到“只在文档中存在代码块时才加载 highlight.js 相关的资源文件
-        hasCodeBlock, 
+        hasCodeBlock,
+        githubName: GITHUB_NAME,
+        repoName: REPO_NAME,
+        fileRealPath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
       },
     );
 
