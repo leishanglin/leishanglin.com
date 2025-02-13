@@ -2,7 +2,7 @@
 title: 首页
 keywords: leishanglin, 个人网站, 首页
 description: 这是 leishanglin 的个人网站，用于个人博客、简历、作品展示等
-changefreq: weekly
+changefreq: daily
 ---
 
 ## 关于
@@ -13,3 +13,4 @@ changefreq: weekly
 
 - [JavaScript：一门流行的编程语言, 常用于开发 Web 应用, 原生应用, 移动端应用等](./javascript/)
 - [tsconfig.json：TypeScript 的配置文件](./tsconfig/)
+- [Todo：我的待办列表](./todo/)
