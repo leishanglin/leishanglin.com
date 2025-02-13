@@ -1,6 +1,6 @@
 ---
-title: JavaScript 实现字节单位转换 —— Byte 转 KB、MB、GB、TB 等
-keywords: JavaScript, 字节单位转换, Byte To KB
+title: JavaScript 实现字节单位转换 —— Byte 转 KB、MB、GB、TB...
+keywords: JavaScript, 字节单位转换
 description: 这是一篇探讨 JavaScript 实现字节单位转换的文章, 涉及 if...else、while、Math.log、BigInt 等多种实现方法
 changefreq: monthly
 ---

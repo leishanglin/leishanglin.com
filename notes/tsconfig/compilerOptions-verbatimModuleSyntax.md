@@ -1,5 +1,5 @@
 ---
-title: tsconfig.json 中 `verbatimModuleSyntax` 配置项的作用
+title: tsconfig.json 中 verbatimModuleSyntax 配置项的作用
 keywords: tsconfig.json, verbatimModuleSyntax
 description: 介绍 tsconfig 中 verbatimModuleSyntax 字段的作用，与 `target` 的区别，启用的前提等
 changefreq: monthly
