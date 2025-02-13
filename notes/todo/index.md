@@ -5,6 +5,8 @@ description: 这是我的待办事项，也是随手记，用于记录后续需�
 changefreq: daily
 ---
 
+- [ ] 博客：首页展示“文章总数”
+- [ ] 博客：增加主题切换
 - [ ] 了解 Google Search Console 的作用和用法
 - [ ] 博客：给 Markdown 文档中的外链统一加个 `rel="nofollow"`，借助 marked.link?
 - [x] 博客：隐藏右上角的袖带，因为意义不大，再另找一个地方链接直当前页面的 github 仓库源码所在地址

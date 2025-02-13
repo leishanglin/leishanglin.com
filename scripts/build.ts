@@ -50,6 +50,14 @@ const sites: {
   priority: PriorityType;
 }[] = [];
 
+// let markdownFileTotalNumber = 0;
+
+// for (const key in filesMap) {
+//   if (key.endsWith('.md')) {
+//     markdownFileTotalNumber++;
+//   }
+// }
+
 for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   const fileOriginFullPath = path.resolve(
     process.cwd(),
@@ -125,6 +133,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         githubName: GITHUB_NAME,
         repoName: REPO_NAME,
         fileRealPath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
+        // blogNumber: markdownFileTotalNumber,
       },
     );
 
@@ -160,6 +169,7 @@ fs.writeFile(
   }),
 );
 
+// 生成 sitemap.xml
 const sitemap = new SitemapStream({ hostname: DOMAIN });
 sites.forEach((site) => {
   sitemap.write(site);
