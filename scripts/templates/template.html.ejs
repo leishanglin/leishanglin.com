@@ -111,6 +111,13 @@
         margin: 0 auto;
         padding: 45px;
       }
+      #dateContainer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+        color: var(--fgColor-muted);
+      }
 
       @media (max-width: 767px) {
         .markdown-body {
@@ -129,12 +136,6 @@
         <span class="title">博客</span>
       </a>
 
-      <!-- Logo链接到首页，使用alt属性为图片添加描述，提升可访问性和SEO -->
-      <!-- <a href="/">
-        <img src="/images/logo.svg" alt="网站的 Logo 图片" title="首页" />
-        <h1><%= title %></h1>
-      </a> -->
-
       <!-- 导航栏使用nav标签，帮助搜索引擎识别导航内容 -->
       <!-- <nav>
         <ul>
@@ -150,15 +151,17 @@
     <main id="pageMain">
       <article class="markdown-body">
         <h1><%= title %></h1>
-        <p>
-          更新于：<time datetime="<%= datePublished %>"
-            ><%= datePublished %></time
-          >
-        </p>
-        <p>
-          创建于：<time datetime="<%= datePublished %>"
-            ><%= datePublished %></time
-          >
+        <p id="dateContainer">
+          <span>
+            更新于：<time datetime="<%= datePublished %>"
+              ><%= dateModified %></time
+            >
+          </span>
+          <span>
+            创建于：<time datetime="<%= datePublished %>"
+              ><%= datePublished %></time
+            >
+          </span>
         </p>
 
         <%- content %>

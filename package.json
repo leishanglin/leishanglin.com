@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec vite-node ./scripts/build.ts",
-    "build": "vite-node ./scripts/build.ts",
-    "seo": "lighthouse http://127.0.0.1:8083 --only-categories=seo"
+    "build": "cross-env MODE=production vite-node ./scripts/build.ts",
+    "seo": "lighthouse https://leishanglin.com"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/fs-extra": "^11.0.4",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^22.10.0",
+    "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
     "ejs": "^3.1.10",
     "fs-extra": "^11.3.0",
