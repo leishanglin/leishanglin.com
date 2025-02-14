@@ -18,6 +18,9 @@
     <!-- 页面描述（搜索引擎 SERP 结果会展示，建议 150 字以内，包含核心关键词） -->
     <meta name="description" content="<%= description %>" />
 
+    <!-- 定义当前页面的主题 -->
+    <meta name="color-scheme" content="light dark" />
+
     <!-- 允许搜索引擎索引和跟随链接 -->
     <meta name="robots" content="index, follow" />
 
@@ -31,13 +34,13 @@
     <meta property="og:title" content="<%= title %>" />
     <meta property="og:description" content="<%= description %>" />
     <meta property="og:image" content="<%= domain %>/images/poster.png" />
-    <meta property="og:site_name" content="<%= `${author}'s blog` %>">
+    <meta property="og:site_name" content="<%= `${author}'s blog` %>" />
     <meta property="og:url" content="<%= domain %><%= path %>" />
     <meta property="og:type" content="website" />
-    <meta property="twitter:image" content="<%= domain %>/images/poster.png">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="<%= title %>">
-    <meta property="twitter:description" content="<%= description %>">
+    <meta property="twitter:image" content="<%= domain %>/images/poster.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="<%= title %>" />
+    <meta property="twitter:description" content="<%= description %>" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
@@ -104,7 +107,7 @@
         box-sizing: border-box;
       }
 
-      .markdown-body {
+      #md {
         min-width: 200px;
         max-width: 980px;
         margin: 0 auto;
@@ -126,11 +129,33 @@
       }
 
       @media (max-width: 767px) {
-        .markdown-body {
+        #md {
           padding: 15px;
         }
       }
     </style>
+
+    <script>
+      // 主题切换
+      const theme = localStorage.getItem('theme') || 'system';
+      const rootElement = document.documentElement;
+      switch (theme) {
+        case 'dark':
+          rootElement.classList.remove('light');
+          rootElement.classList.add('dark');
+          break;
+        case 'light':
+          rootElement.classList.remove('dark');
+          rootElement.classList.add('light');
+          break;
+        case 'system':
+          rootElement.classList.remove('dark');
+          rootElement.classList.remove('light');
+          break;
+        default:
+          console.warn(`Unknown theme value: ${theme}.`);
+      }
+    </script>
   </head>
 
   <body>
@@ -141,11 +166,16 @@
         <img class="logo" alt="网站图标" src="/images/logo.svg" />
         <span class="title">博客</span>
       </a>
+
+      <!-- 右侧 -->
+      <div class="right-wrapper">
+        <button id="themeToggleBtn">toggle</button>
+      </div>
     </header>
 
     <!-- 使用main标签包裹主要内容，帮助搜索引擎识别页面的核心内容 -->
     <main id="pageMain">
-      <article class="markdown-body">
+      <article id="md">
         <h1><%= title %></h1>
         <div id="dateContainer">
           <span>
@@ -164,7 +194,11 @@
               href="<%= `${githubName}/${repoName}/${githubSourceFilePath}` %>"
               target="_blank"
               rel="nofollow"
-              style="display: inline-flex; align-items: center; color: var(--fgColor-muted);"
+              style="
+                display: inline-flex;
+                align-items: center;
+                color: var(--fgColor-muted);
+              "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -220,12 +254,11 @@
     <!-- 代码块语法高亮 -->
     <script src="/scripts/highlight.min.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
+      document.addEventListener('DOMContentLoaded', () => {
         hljs.highlightAll();
       });
     </script>
-    <% } %>
-
+    <% } %> <% if(isProd) { %>
     <!-- For Vercel-speed-insights -->
     <script>
       window.si =
@@ -235,5 +268,6 @@
         };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <% } %>
   </body>
 </html>

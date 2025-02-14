@@ -1,8 +1,9 @@
-pre code.hljs {
-  /* github-markdown.min.css 中已经定义了外层的内边距，这里就不用定义了 */
+.markdown-body pre {
   padding: 0;
 }
-
+.hljs {
+  background: inherit !important;
+}
 html {
   background-color: var(--bgColor-default);
 }
@@ -33,6 +34,64 @@ html {
   color: var(--fgColor-default);
   font-size: 1.25rem;
 }
+#pageHeader .right-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* 主题切换按钮样式 START */
+#pageHeader .right-wrapper .theme-toggle {
+  --theme-btn-border-color: #ebebeb;
+  height: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--theme-btn-border-color);
+  display: flex;
+  align-items: center;
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn {
+  color: var(--borderColor-default);
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background-color: inherit;
+  padding: 0;
+  position: relative;
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn svg {
+  /* for e.target.dataset */
+  pointer-events: none;
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn:hover {
+  color: var(--fgColor-default);
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn.active {
+  border-color: var(--theme-btn-border-color);
+  color: var(--fgColor-default);
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn.moon {
+  left: -1px;
+}
+#pageHeader .right-wrapper .theme-toggle .theme-btn.system {
+  right: 1px;
+}
+:root.dark #pageHeader .right-wrapper .theme-toggle {
+  --theme-btn-border-color: #2e2e2e;
+}
+@media (prefers-color-scheme: dark) {
+  #pageHeader .right-wrapper .theme-toggle {
+    --theme-btn-border-color: #2e2e2e;
+  }
+  :root.light #pageHeader .right-wrapper .theme-toggle {
+    --theme-btn-border-color: #ebebeb;
+  }
+}
+/* 主题切换按钮样式 END */
 
 /* 页面主体样式 */
 #pageMain {
@@ -50,11 +109,9 @@ html {
   height: 56px;
   padding-bottom: 10px;
 }
-
 #pageFooter .copyright {
   margin: 0;
 }
-
 #pageFooter,
 #pageFooter a {
   color: var(--fgColor-muted);
@@ -63,9 +120,4 @@ html {
 #pageFooter a:hover {
   color: var(--fgColor-default);
   text-decoration: underline;
-}
-
-/* 右上角 fork me 缎带样式 */
-.github-fork-ribbon:before {
-  background-color: var(--fgColor-default);
 }
