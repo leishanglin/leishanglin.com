@@ -5,6 +5,10 @@ description: 这是我的待办事项，也是随手记，用于记录后续需�
 changefreq: daily
 ---
 
+- [ ] 设计或找一张 4:3 的图片，放在 Open Graph 中
+- [ ] 制作一个 404 页面，放在博客根路径下
+- [ ] 在 CSS 分类下写一篇关于 github-markdown-css 的介绍
+- [ ] 博客：添加 twitter 的 Open Graph
 - [x] 博客：首页展示“文章总数”
 - [ ] 博客：增加主题切换
 - [ ] 了解 Google Search Console 的作用和用法

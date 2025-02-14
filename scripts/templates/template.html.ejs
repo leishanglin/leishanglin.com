@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 使用HTML5的DOCTYPE声明，确保浏览器以标准模式渲染页面 -->
 <!-- 设置html标签的lang属性，指定页面内容的语言为中文（简体），有助于搜索引擎理解页面内容的目标受众 -->
-<html lang="zh-CN" style="font-size: 16px" data-theme="light">
+<html lang="zh-CN" style="font-size: 16px" data-theme="dark">
   <head>
     <!-- 指定字符集，确保搜索引擎正确解析 -->
     <meta charset="UTF-8" />
@@ -30,12 +30,14 @@
     <!-- Open Graph (Facebook, Twitter, LinkedIn) -->
     <meta property="og:title" content="<%= title %>" />
     <meta property="og:description" content="<%= description %>" />
-    <meta
-      property="og:image"
-      content="<%= domain %>/images/large-favicon.png"
-    />
+    <meta property="og:image" content="<%= domain %>/images/poster.png" />
+    <meta property="og:site_name" content="<%= `${author}'s blog` %>">
     <meta property="og:url" content="<%= domain %><%= path %>" />
     <meta property="og:type" content="website" />
+    <meta property="twitter:image" content="<%= domain %>/images/large-favicon.png">
+    <meta property="twitter:card" content="<%= domain %>/images/poster.png">
+    <meta property="twitter:title" content="<%= title %>">
+    <meta property="twitter:description" content="<%= description %>">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
@@ -123,7 +125,7 @@
         gap: 0.5rem;
       }
 
-      @media (max-width: 770px) {
+      @media (max-width: 767px) {
         .markdown-body {
           padding: 15px;
         }
