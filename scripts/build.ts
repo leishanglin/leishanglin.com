@@ -147,7 +147,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     sites.push({
       url: `${DOMAIN}${htmlPath}`,
       changefreq: dataObj.data.changefreq,
-      lastmod: dayjs(updatedAt).format('YYYY-MM-DD'),
+      lastmod: dayjs(updatedAt).format('YYYY-MM-DD hh:mm:ss'),
       priority:
         changefreqPriorityMap[dataObj.data.changefreq as ChangefreqType],
     });
