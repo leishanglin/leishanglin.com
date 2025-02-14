@@ -23,7 +23,8 @@ const REPO_NAME = 'leishanglin.com';
 const HTML_TEMPLATE_PATH = './templates/template.html.ejs';
 const ROBOTS_TEMPLATE_PATH = './templates/robots.txt.ejs';
 
-const filesMap = await loadDir(path.resolve(__dirname, NOTES_DIR));
+const notesPath = path.resolve(__dirname, NOTES_DIR);
+const filesMap = await loadDir(notesPath);
 const prefixPath = path.resolve(__dirname, DIST_DIR);
 
 const dirCheckMap: Record<string, boolean> = {};
@@ -164,14 +165,18 @@ fs.writeFile(
   }),
 );
 
-// 生成 sitemap.xml
-const sitemap = new SitemapStream({ hostname: DOMAIN });
-sites.forEach((site) => {
-  sitemap.write(site);
-});
-sitemap.end();
-const sitemapXml = await streamToPromise(sitemap);
-fs.writeFile(path.resolve(prefixPath, 'sitemap.xml'), sitemapXml);
+// 平时偶尔在本地build一下，生成的sitemap 会被推送到 github 
+// 进而被 Vercel 使用，打入 dist 中，而 Vercel 中 build 时，新生成的 sitemap 就不会被使用，以此解决“lastmod 不正确”的问题
+if (isProd) {
+  // 生成 sitemap.xml
+  const sitemap = new SitemapStream({ hostname: DOMAIN });
+  sites.forEach((site) => {
+    sitemap.write(site);
+  });
+  sitemap.end();
+  const sitemapXml = await streamToPromise(sitemap);
+  fs.writeFile(path.join(notesPath, 'sitemap.xml'), sitemapXml);
+}
 
 // 在首页中填入博客总数
 const indexFilePath = `${prefixPath}/index.html`;
