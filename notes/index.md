@@ -9,6 +9,8 @@ changefreq: daily
 
 这是一个"纯静态"的站点，托管在 [Vercel](https://vercel.com/) 上，网站源码(包括文章源文件) 公开在 [Github](https://github.com/leishanglin/leishanglin.com)。
 
+博客总数：**[[blogTotalNumber]]**
+
 ## 分类
 
 - [JavaScript：一门流行的编程语言, 常用于开发 Web 应用, 原生应用, 移动端应用等](./javascript/)

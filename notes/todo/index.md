@@ -5,7 +5,7 @@ description: 这是我的待办事项，也是随手记，用于记录后续需�
 changefreq: daily
 ---
 
-- [ ] 博客：首页展示“文章总数”
+- [x] 博客：首页展示“文章总数”
 - [ ] 博客：增加主题切换
 - [ ] 了解 Google Search Console 的作用和用法
 - [ ] 博客：给 Markdown 文档中的外链统一加个 `rel="nofollow"`，借助 marked.link?

@@ -50,14 +50,6 @@ const sites: {
   priority: PriorityType;
 }[] = [];
 
-// let markdownFileTotalNumber = 0;
-
-// for (const key in filesMap) {
-//   if (key.endsWith('.md')) {
-//     markdownFileTotalNumber++;
-//   }
-// }
-
 for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   const fileOriginFullPath = path.resolve(
     process.cwd(),
@@ -177,3 +169,12 @@ sites.forEach((site) => {
 sitemap.end();
 const sitemapXml = await streamToPromise(sitemap);
 fs.writeFile(path.resolve(prefixPath, 'sitemap.xml'), sitemapXml);
+
+// 在首页中填入博客总数
+const indexFilePath = `${prefixPath}/index.html`;
+const fileContent = (await fs.readFile(indexFilePath)).toString('utf-8');
+const newFileContent = fileContent.replace(
+  '[[blogTotalNumber]]',
+  sites.length.toString(),
+);
+await fs.writeFile(indexFilePath, newFileContent);
