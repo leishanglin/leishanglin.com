@@ -10,13 +10,13 @@ import dayjs from 'dayjs';
 import { SitemapStream, streamToPromise } from 'sitemap';
 
 const { MODE } = process.env;
+const isProd = MODE === 'production';
 const NOTES_FOLDER_NAME = 'notes';
 const NOTES_DIR = `../${NOTES_FOLDER_NAME}`;
 const DIST_DIR = '../dist';
-const AUTHOR = 'leishanglin(雷尚林)';
+const AUTHOR = 'leishanglin';
 const DOMAIN_NAME = 'leishanglin.com';
-const DOMAIN =
-  MODE === 'production' ? 'https://leishanglin.com' : 'http://127.0.0.1:8083';
+const DOMAIN = isProd ? 'https://leishanglin.com' : 'http://127.0.0.1:8083';
 const GITHUB_NAME = 'https://github.com/leishanglin';
 const REPO_NAME = 'leishanglin.com';
 const HTML_TEMPLATE_PATH = './templates/template.html.ejs';
@@ -122,10 +122,10 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         dateModified: dayjs(updatedAt).format('YYYY-MM-DD'),
         // highlight.js 等资源比较大，且只用在代码块中，所以传入一个判断是否存在代码块的属性，这样就可以做到“只在文档中存在代码块时才加载 highlight.js 相关的资源文件
         hasCodeBlock,
+        isProd,
         githubName: GITHUB_NAME,
         repoName: REPO_NAME,
-        fileRealPath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
-        // blogNumber: markdownFileTotalNumber,
+        githubSourceFilePath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
       },
     );
 
@@ -139,7 +139,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     });
     fs.writeFile(
       fileFullPath.replace(/\.md$/, '.html'),
-      MODE === 'production' ? minifiedRawHtml : renderedRawHtml,
+      isProd ? minifiedRawHtml : renderedRawHtml,
       'utf-8',
     );
     sites.push({
@@ -154,6 +154,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   }
 }
 
+// 生成 robots.txt
 fs.writeFile(
   path.resolve(prefixPath, 'robots.txt'),
   await ejs.renderFile(path.resolve(__dirname, ROBOTS_TEMPLATE_PATH), {
