@@ -17,3 +17,4 @@ changefreq: daily
 - [tsconfig.json：TypeScript 的配置文件](./tsconfig/)
 - [Todo：我的待办列表](./todo/)
 - [CSS：Web 前端必会技能](./css/)
+- [个人简历](./resume)

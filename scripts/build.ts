@@ -15,6 +15,7 @@ const NOTES_FOLDER_NAME = 'notes';
 const NOTES_DIR = `../${NOTES_FOLDER_NAME}`;
 const DIST_DIR = '../dist';
 const AUTHOR = 'leishanglin';
+const CHINESE_NAME = '雷尚林';
 const DOMAIN_NAME = 'leishanglin.com';
 const DOMAIN = isProd ? 'https://leishanglin.com' : 'http://127.0.0.1:8083';
 const GITHUB_NAME = 'https://github.com/leishanglin';
@@ -126,6 +127,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         githubName: GITHUB_NAME,
         repoName: REPO_NAME,
         githubSourceFilePath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
+        chineseName: CHINESE_NAME,
       },
     );
 
