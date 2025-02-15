@@ -7,9 +7,9 @@ changefreq: yearly
 
 分享一个 css 资源，它的作用是在页面右上角展示一个“Fork me on GitHub”的缎带，如图所示：
 
-![示例图片](./image.png)
+![示例图片](/css/assets/ribbon-show.png)
 
-点击下载：[gh-fork-ribbon.min.css ](./gh-fork-ribbon.min.css)。
+点击下载：[gh-fork-ribbon.min.css ](/css/assets/gh-fork-ribbon.min.css)。
 
 对应的 HTML 片段：
 

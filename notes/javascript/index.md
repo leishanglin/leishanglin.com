@@ -5,4 +5,4 @@ description: 这是一个列表，用于列出跟 JavaScript 有关的文章，�
 changefreq: weekly
 ---
 
-- [JavaScript 实现字节单位转换 —— Byte 转 KB、MB、GB、TB 等](./byte-unit-conversion/)
+- [JavaScript 实现字节单位转换 —— Byte 转 KB、MB、GB、TB 等](/javascript/byte-unit-conversion.html)

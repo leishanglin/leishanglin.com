@@ -100,6 +100,10 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
       hasCodeBlock = true;
       return marked.Renderer.prototype.code.call(this, config);
     };
+    // 自定义链接渲染逻辑
+    // renderer.link = ({href}:marked.Tokens.Link) => {
+    //   return 
+    // }
 
     marked.setOptions({ renderer });
 
@@ -108,9 +112,6 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     const createdAt = fileStat.birthtime;
     const updatedAt = fileStat.mtime;
     let htmlPath = `/${fileRelativePath.replace(/\.md$/, '')}`;
-    if (htmlPath.endsWith('/index')) {
-      htmlPath = htmlPath.replace(/\/index$/, '/');
-    }
     const renderedRawHtml = await ejs.renderFile(
       path.resolve(__dirname, HTML_TEMPLATE_PATH),
       {
@@ -146,7 +147,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
       'utf-8',
     );
     sites.push({
-      url: `${DOMAIN}${htmlPath}`,
+      url: `${DOMAIN}${htmlPath}.html`,
       changefreq: dataObj.data.changefreq,
       lastmod: dayjs(updatedAt).format('YYYY-MM-DD hh:mm:ss'),
       priority:

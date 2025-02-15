@@ -28,14 +28,14 @@
     <meta name="author" content="<%= author %>" />
 
     <!-- Canonical URL（避免重复内容被搜索引擎误判，以此告诉搜索引擎，这份内容的“正版”来源URL是这个，避免权重分散） -->
-    <link rel="canonical" href="<%= domain %><%= path %>" />
+    <link rel="canonical" href="<%= domain %><%= path %>.html" />
 
     <!-- Open Graph (Facebook, Twitter, LinkedIn) -->
     <meta property="og:title" content="<%= title %>" />
     <meta property="og:description" content="<%= description %>" />
     <meta property="og:image" content="<%= domain %>/images/poster.png" />
     <meta property="og:site_name" content="<%= `${author}'s blog` %>" />
-    <meta property="og:url" content="<%= domain %><%= path %>" />
+    <meta property="og:url" content="<%= domain %><%= path %>.html" />
     <meta property="og:type" content="website" />
     <meta property="twitter:image" content="<%= domain %>/images/poster.png" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -61,7 +61,7 @@
         "headline": "<%= title %>",
         "name": "<%= title %>",
         "description": "<%= description %>",
-        "url": "<%= domain %><%= path %>",
+        "url": "<%= domain %><%= path %>.html",
         "image": "<%= domain %>/images/large-favicon.png",
         "author": {
           "@type": "Person",
