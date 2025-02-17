@@ -18,7 +18,7 @@ changefreq: daily
 - [x] 博客：首页展示“文章总数”
 - [x] 博客：增加主题切换
 - [ ] 了解 Google Search Console 的作用和用法
-- [ ] 博客：给 Markdown 文档中的外链统一加个 `rel="nofollow"`，借助 marked.link?
+- [x] 博客：给 Markdown 文档中的外链统一加个 `rel="nofollow"`，借助 marked.link?
 - [x] 博客：隐藏右上角的袖带，因为意义不大，再另找一个地方链接直当前页面的 github 仓库源码所在地址
-- [ ] 博客：做一个 markdown 文档和分类是否被“引用”的校验
-- [ ] 简要写一下博客中的 Markdown 文档的书写规则
+- [x] 博客：做一个 markdown 文档和分类是否被“引用”的校验
+- [x] 简要写一下博客中的 Markdown 文档的书写规则
