@@ -15,7 +15,8 @@
       "styles/hljs-theme-github.min.css",
       "styles/index.css",
       "index.md",
-      "404.md"
+      "404.md",
+      "vercel.json"
     ]
   }
 }

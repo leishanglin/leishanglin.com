@@ -5,6 +5,7 @@ description: 这是我的待办事项，也是随手记，用于记录后续需�
 changefreq: daily
 ---
 
+- [ ] 给 adminterminator 重新起一个名字，因为太长了
 - [ ] 博客：做“增量”构建
 - [x] 处理相对路径的静态资源在url末尾不加 / 时无法访问的问题
 - [x] 处理 sitemap.xml lastmod 字段不正确的问题，因为它是在 Vercel 上生成的
