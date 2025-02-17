@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { loadDir } from './loadDir';
+import { loadDir } from './utils/loadDir';
 import * as marked from 'marked';
 import matter from 'gray-matter';
 import * as fs from 'node:fs/promises';
@@ -8,6 +8,7 @@ import ejs from 'ejs';
 import { minify } from 'html-minifier-terser';
 import dayjs from 'dayjs';
 import { SitemapStream, streamToPromise } from 'sitemap';
+import config from './build.config.json';
 
 const { MODE } = process.env;
 const isProd = MODE === 'production';
@@ -51,11 +52,29 @@ const sites: {
   lastmod: string;
   priority: PriorityType;
 }[] = [];
+const usedFiles: string[] = [];
 
 const renderer = new marked.Renderer();
 
+const validateUrl = (url: string) => {
+  // 校验资源链接格式
+  if (!url.startsWith('http') && !url.startsWith('/')) {
+    throw new Error(`validateUrl Error: \`${url}\` is invalid.`);
+  }
+
+  // 校验资源是否存在
+  if (url.startsWith('/')) {
+    const key = url.replace(/^\//, '');
+    if (!(key in filesMap)) {
+      throw new Error(`validateUrl Error: ${url} is not exist.`);
+    }
+    usedFiles.push(key);
+  }
+};
+
 // 自定义图片渲染逻辑
 renderer.image = (image: marked.Tokens.Image): string => {
+  validateUrl(image.href);
   // 添加语义化标签：figure，并让图片进行懒加载（loading="lazy"）
   return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
 };
@@ -68,6 +87,8 @@ renderer.code = (config: marked.Tokens.Code): string => {
 
 // 自定义链接渲染逻辑
 renderer.link = (config: marked.Tokens.Link) => {
+  validateUrl(config.href);
+
   let { href, text, title } = config;
 
   if (href.startsWith('/') || href.startsWith(DOMAIN)) {
@@ -193,6 +214,20 @@ if (isProd) {
   sitemap.end();
   const sitemapXml = await streamToPromise(sitemap);
   fs.writeFile(path.join(notesPath, 'sitemap.xml'), sitemapXml);
+}
+
+// 检测“孤岛资源”
+const unusedResources = Object.keys(filesMap).filter((key) => {
+  return (
+    !usedFiles.includes(key) && !config.validate.ignoreFilePaths.includes(key)
+  );
+});
+if (unusedResources.length > 0) {
+  throw new Error(
+    `The following resources are not being used：\n${unusedResources.join(
+      '\n',
+    )}`,
+  );
 }
 
 // 在首页中填入博客总数
