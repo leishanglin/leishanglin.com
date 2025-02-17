@@ -9,4 +9,4 @@ changefreq: "monthly"
 
 下载源文件：[github-markdown.min.css](/styles/github-markdown.min.css)。
 
-注意：这份源文件我有改过，目的是支持手动切换主题（通过在 `:root.dark`）。
+注意：这份源文件我有改过，目的是支持手动切换主题（通过 `:root.dark`）。

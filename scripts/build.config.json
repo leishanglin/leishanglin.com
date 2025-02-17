@@ -16,7 +16,8 @@
       "styles/index.css",
       "index.md",
       "404.md",
-      "vercel.json"
+      "vercel.json",
+      "favicon.ico"
     ]
   }
 }
