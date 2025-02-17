@@ -14,7 +14,8 @@
       "styles/github-markdown.min.css",
       "styles/hljs-theme-github.min.css",
       "styles/index.css",
-      "index.md"
+      "index.md",
+      "404.md"
     ]
   }
 }
