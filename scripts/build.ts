@@ -203,7 +203,7 @@ fs.writeFile(
 );
 
 // 生成 sitemap
-// 平时偶尔在本地build一下，生成的sitemap 会被推送到 github
+// 平时偶尔在本地 build 一下，生成的 sitemap 会被推送到 github
 // 进而被 Vercel 使用，打入 dist 中，而 Vercel 中 build 时，新生成的 sitemap 就不会被使用，以此解决“lastmod 不正确”的问题
 if (isProd) {
   // 生成 sitemap.xml
