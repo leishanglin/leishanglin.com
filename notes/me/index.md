@@ -5,6 +5,6 @@ description: 这是一个列表，用于列出跟我和这个网站的一些信�
 changefreq: monthly
 ---
 
-- [个人简历](/me/resume.html)
-- [待办事项](/me/todo.html)
-- [给自己看的博客编写注意事项](/me/blog-rules.html)
+- [个人简历](/me/resume.md)
+- [待办事项](/me/todo.md "测试一下")
+- [给自己看的博客编写注意事项](/me/blog-rules.md)

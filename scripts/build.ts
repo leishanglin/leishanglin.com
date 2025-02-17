@@ -52,6 +52,41 @@ const sites: {
   priority: PriorityType;
 }[] = [];
 
+const renderer = new marked.Renderer();
+
+// 自定义图片渲染逻辑
+renderer.image = (image: marked.Tokens.Image): string => {
+  // 添加语义化标签：figure，并让图片进行懒加载（loading="lazy"）
+  return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
+};
+let hasCodeBlock = false;
+// 自定义代码块渲染逻辑
+renderer.code = (config: marked.Tokens.Code): string => {
+  hasCodeBlock = true;
+  return marked.Renderer.prototype.code.call(this, config);
+};
+
+// 自定义链接渲染逻辑
+renderer.link = (config: marked.Tokens.Link) => {
+  let { href, text, title } = config;
+
+  if (href.startsWith('/') || href.startsWith(DOMAIN)) {
+    if (href.startsWith('/') && href.endsWith('.md')) {
+      href = href.replace(/\.md$/, '.html');
+    }
+
+    return `<a href="${href}" ${
+      title ? `title="${title}"` : ''
+    } target="_self">${text}</a>`;
+  }
+
+  return `<a href="${href}" ${
+    title ? `title="${title}"` : ''
+  } target="_blank" ref="nofollow">${text}</a>`;
+};
+
+marked.setOptions({ renderer });
+
 for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   const fileOriginFullPath = path.resolve(
     process.cwd(),
@@ -86,26 +121,6 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         `changefreq 字段不对，只能在这几个中选：${changefreqKeys.join(', ')}`,
       );
     }
-
-    const renderer = new marked.Renderer();
-
-    // 自定义图片渲染逻辑
-    renderer.image = (image: marked.Tokens.Image): string => {
-      // 添加语义化标签：figure，并让图片进行懒加载（loading="lazy"）
-      return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
-    };
-    let hasCodeBlock = false;
-    // 自定义代码块渲染逻辑
-    renderer.code = (config: marked.Tokens.Code): string => {
-      hasCodeBlock = true;
-      return marked.Renderer.prototype.code.call(this, config);
-    };
-    // 自定义链接渲染逻辑
-    // renderer.link = ({href}:marked.Tokens.Link) => {
-    //   return 
-    // }
-
-    marked.setOptions({ renderer });
 
     const rawHtml = marked.parse(dataObj.content, {}) as string;
     const fileStat = await fs.stat(fileOriginFullPath);
@@ -166,7 +181,8 @@ fs.writeFile(
   }),
 );
 
-// 平时偶尔在本地build一下，生成的sitemap 会被推送到 github 
+// 生成 sitemap
+// 平时偶尔在本地build一下，生成的sitemap 会被推送到 github
 // 进而被 Vercel 使用，打入 dist 中，而 Vercel 中 build 时，新生成的 sitemap 就不会被使用，以此解决“lastmod 不正确”的问题
 if (isProd) {
   // 生成 sitemap.xml

@@ -13,7 +13,7 @@ changefreq: daily
 
 ## 分类
 
-- [JavaScript：一门流行的编程语言, 常用于开发 Web 应用, 原生应用, 移动端应用等](/javascript/index.html)
-- [tsconfig.json：TypeScript 的配置文件](/tsconfig/index.html)
-- [CSS：Web 前端必会技能](/css/index.html)
-- [Me: 关于我、关于这份文档](/me/index.html)
+- [JavaScript：一门流行的编程语言, 常用于开发 Web 应用, 原生应用, 移动端应用等](/javascript/index.md)
+- [tsconfig.json：TypeScript 的配置文件](/tsconfig/index.md)
+- [CSS：Web 前端必会技能](/css/index.md)
+- [Me: 关于我、关于这份文档](/me/index.md)
