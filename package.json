@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec vite-node ./scripts/build.ts",
     "build": "cross-env MODE=production vite-node ./scripts/build.ts",
     "test": "cross-env MODE=development vite-node ./scripts/build.ts",
     "seo": "lighthouse https://leishanglin.com"

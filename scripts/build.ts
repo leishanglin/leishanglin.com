@@ -9,6 +9,7 @@ import { minify } from 'html-minifier-terser';
 import dayjs from 'dayjs';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import config from './build.config.json';
+import { existsSync } from 'fs';
 
 const { MODE } = process.env;
 const isProd = MODE === 'production';
@@ -45,6 +46,18 @@ const markdownMetaDataKeys = ['title', 'keywords', 'description', 'changefreq'];
 
 type ChangefreqType = keyof typeof changefreqPriorityMap;
 type PriorityType = (typeof changefreqPriorityMap)[ChangefreqType];
+type FileDate = { create: string; update: string };
+
+const fileDateMap: Record<string, FileDate> = {};
+let originDateMap: Record<string, FileDate> = {};
+
+// file-date-map.json 存在的原因，是为了解决 Vercel 容器化构建，丢失文件的创建和更新时间，这个问题
+if (existsSync(path.join(notesPath, 'file-date-map.json'))) {
+  const rawData = (
+    await fs.readFile(path.join(notesPath, 'file-date-map.json'))
+  ).toString();
+  originDateMap = JSON.parse(rawData);
+}
 
 const sites: {
   url: string;
@@ -152,6 +165,15 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
     const createdAt = fileStat.birthtime;
     const updatedAt = fileStat.mtime;
     let htmlPath = `/${fileRelativePath.replace(/\.md$/, '')}`;
+    let createTime = dayjs(createdAt).format('YYYY-MM-DD');
+    let updateTime = dayjs(updatedAt).format('YYYY-MM-DD');
+    // 先存起来，供下次使用(Vercel Build)
+    fileDateMap[fileRelativePath] = { create: createTime, update: updateTime };
+
+    // 用于页面渲染
+    createTime = originDateMap[fileRelativePath]?.create || createTime;
+    updateTime = originDateMap[fileRelativePath]?.update || updateTime;
+
     const renderedRawHtml = await ejs.renderFile(
       path.resolve(__dirname, HTML_TEMPLATE_PATH),
       {
@@ -161,8 +183,8 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         domain: DOMAIN,
         domainName: DOMAIN_NAME,
         path: htmlPath,
-        datePublished: dayjs(createdAt).format('YYYY-MM-DD'),
-        dateModified: dayjs(updatedAt).format('YYYY-MM-DD'),
+        datePublished: createTime,
+        dateModified: updateTime,
         // highlight.js 等资源比较大，且只用在代码块中，所以传入一个判断是否存在代码块的属性，这样就可以做到“只在文档中存在代码块时才加载 highlight.js 相关的资源文件
         hasCodeBlock,
         isProd,
@@ -198,6 +220,20 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
   }
 }
 
+// 检测“孤岛资源”
+const unusedResources = Object.keys(filesMap).filter((key) => {
+  return (
+    !usedFiles.includes(key) && !config.validate.ignoreFilePaths.includes(key)
+  );
+});
+if (unusedResources.length > 0) {
+  throw new Error(
+    `The following resources are not being used：\n${unusedResources.join(
+      '\n',
+    )}`,
+  );
+}
+
 // 生成 robots.txt
 fs.writeFile(
   path.resolve(prefixPath, 'robots.txt'),
@@ -220,19 +256,11 @@ if (isProd) {
   fs.writeFile(path.join(notesPath, 'sitemap.xml'), sitemapXml);
 }
 
-// 检测“孤岛资源”
-const unusedResources = Object.keys(filesMap).filter((key) => {
-  return (
-    !usedFiles.includes(key) && !config.validate.ignoreFilePaths.includes(key)
-  );
-});
-if (unusedResources.length > 0) {
-  throw new Error(
-    `The following resources are not being used：\n${unusedResources.join(
-      '\n',
-    )}`,
-  );
-}
+// 生成 file-date-map.json
+fs.writeFile(
+  path.join(notesPath, 'file-date-map.json'),
+  JSON.stringify(fileDateMap),
+);
 
 // 在首页中填入博客总数
 const indexFilePath = `${prefixPath}/index.html`;

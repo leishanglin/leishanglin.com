@@ -17,7 +17,8 @@
       "index.md",
       "404.md",
       "vercel.json",
-      "favicon.ico"
+      "favicon.ico",
+      "file-date-map.json"
     ]
   }
 }

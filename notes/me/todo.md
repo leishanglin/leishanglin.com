@@ -5,6 +5,7 @@ description: 这是我的待办事项，也是随手记，用于记录后续需�
 changefreq: daily
 ---
 
+- [ ] 为将来要做的东西单独注册一个域名
 - [ ] 目前，文档中引用的其他markdown文档，在github中访问时，缺少 `notes/` 这一层，导致404，得想想怎么解决
 - [ ] 给 adminterminator 重新起一个名字，因为太长了
 - [ ] 博客：做“增量”构建
