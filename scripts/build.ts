@@ -58,7 +58,11 @@ const renderer = new marked.Renderer();
 
 const validateUrl = (url: string) => {
   // 校验资源链接格式
-  if (!url.startsWith('http') && !url.startsWith('/')) {
+  if (
+    !url.startsWith('http') &&
+    !url.startsWith('/') &&
+    !url.startsWith('mailto')
+  ) {
     throw new Error(`validateUrl Error: \`${url}\` is invalid.`);
   }
 
