@@ -2,18 +2,7 @@
   "validate": {
     "ignoreFilePaths": [
       "googleac0b607e7a31c61e.html",
-      "images/favicon.ico",
-      "images/favicon.png",
-      "images/favicon.svg",
-      "images/large-favicon.png",
-      "images/logo.svg",
-      "images/poster.png",
-      "scripts/highlight.min.js",
-      "scripts/index.js",
       "sitemap.xml",
-      "styles/github-markdown.min.css",
-      "styles/hljs-theme-github.min.css",
-      "styles/index.css",
       "index.md",
       "404.md",
       "vercel.json",

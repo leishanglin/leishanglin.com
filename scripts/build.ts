@@ -222,6 +222,15 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
 
 // 检测“孤岛资源”
 const unusedResources = Object.keys(filesMap).filter((key) => {
+  // 排除几个特殊文件夹中的文件，因为他们直接在模板中使用
+  if (
+    key.startsWith('styles/') ||
+    key.startsWith('images/') ||
+    key.startsWith('scripts/')
+  ) {
+    return false;
+  }
+
   return (
     !usedFiles.includes(key) && !config.validate.ignoreFilePaths.includes(key)
   );
