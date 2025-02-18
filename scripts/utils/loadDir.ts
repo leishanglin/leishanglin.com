@@ -22,6 +22,10 @@ export const loadDir = async (dirPath: string) => {
       if (entry.isDirectory()) {
         await traverse(fullPath);
       } else if (entry.isFile()) {
+        // 不处理 MacOS 中的 .DS_Store 文件
+        if (relativePath.endsWith('.DS_Store')) {
+          continue;
+        }
         const key = toUnixPath(relativePath);
         const value = await fs.readFile(fullPath);
         filesMap[key] = value;
