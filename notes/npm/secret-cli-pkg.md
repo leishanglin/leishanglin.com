@@ -588,8 +588,3 @@ package.json 中的 `type` 字段是 Node12 版本新增的，因为那时的 No
 1. package.json 中的 `type` 字段需要**始终**显式声明为：`module`；
 2. rollup.config.js 中的 `output.format` 的值得是 `es`；
 3. tsconfig.json 中的 `target` 和 `module` 字段的值也得是 ESM 一类的可选项；
-
-## 参考链接
-
-- 项目地址：https://github.com/reasonly8/secret-npm-pkg
-- Yargs: https://yargs.js.org/
