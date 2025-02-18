@@ -96,7 +96,7 @@ html {
 /* 页面主体样式 */
 #pageMain {
   padding-top: 56px;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 32px);
 }
 
 /* 页脚样式 */
@@ -106,7 +106,7 @@ html {
   align-items: center;
   justify-content: space-between;
   font-size: 0.875rem;
-  height: 56px;
+  height: 32px;
   padding-bottom: 10px;
 }
 #pageFooter .copyright {
