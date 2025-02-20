@@ -24,6 +24,7 @@ const GITHUB_NAME = 'https://github.com/leishanglin';
 const REPO_NAME = 'leishanglin.com';
 const HTML_TEMPLATE_PATH = './templates/template.html.ejs';
 const ROBOTS_TEMPLATE_PATH = './templates/robots.txt.ejs';
+const LANG = 'zh-CN';
 
 const notesPath = path.resolve(__dirname, NOTES_DIR);
 const filesMap = await loadDir(notesPath);
@@ -192,6 +193,7 @@ for (const [fileRelativePath, content] of Object.entries(filesMap)) {
         repoName: REPO_NAME,
         githubSourceFilePath: `blob/main/${NOTES_FOLDER_NAME}/${fileRelativePath}`,
         chineseName: CHINESE_NAME,
+        lang: LANG,
       },
     );
 
