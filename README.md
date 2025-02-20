@@ -1,4 +1,3 @@
 # leishanglin.com
 
-Store my tech-notes, Visit: [https://leishanglin.com/](https://leishanglin.com/)
-
+This repository stores my blog posts, Welcome to visit: https://leishanglin.com

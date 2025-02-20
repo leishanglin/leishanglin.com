@@ -1,10 +1,11 @@
 ---
-title: 待办事项
-keywords: 待办事项, todo-list, 随手记
-description: 这是我的待办事项，也是随手记，用于记录后续需要做的事，以及一些灵感、想法等，一句话描述
-changefreq: daily
+title: '待办事项'
+keywords: '待办事项, todo-list, 随手记'
+description: '这是我的待办事项，也是随手记，用于记录后续需要做的事，以及一些灵感、想法等，一句话描述'
+changefreq: 'daily'
 ---
 
+- [ ] 为博客提供中文和英文两个版本
 - [ ] 文档的创建时间和更新时间依赖本地操作系统，得考虑“固定”住 file-date-map.json
 - [ ] 为将来要做的东西单独注册一个域名
 - [ ] 目前，文档中引用的其他markdown文档，在github中访问时，缺少 `notes/` 这一层，导致404，得想想怎么解决

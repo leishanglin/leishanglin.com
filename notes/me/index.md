@@ -8,3 +8,4 @@ changefreq: "weekly"
 - [个人简历](/me/resume.md)
 - [待办事项](/me/todo.md "测试一下")
 - [给自己看的博客编写注意事项](/me/blog-rules.md)
+- [代码编写注意事项](/me/code-rules.md)
