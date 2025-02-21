@@ -195,8 +195,8 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
           domain: DOMAIN,
           domainName: config.domainName,
           path: htmlPath,
-          datePublished: createTime,
-          dateModified: updateTime,
+          datePublished: createTime.split(' ')[0],
+          dateModified: updateTime.split(' ')[0],
           // Resources like highlight.js are relatively large and are only used in code blocks. Therefore, by passing a property to check if code blocks exist, you can ensure that highlight.js and related resource files are loaded only when code blocks are present in the document.
           hasCodeBlock,
           isProd,
