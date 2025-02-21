@@ -56,5 +56,3 @@ blogs.forEach((blog) => {
 sitemap.end();
 const sitemapXml = await streamToPromise(sitemap);
 fs.writeFile(path.join(outDirPath, 'sitemap.xml'), sitemapXml);
-
-console.log('Done');
