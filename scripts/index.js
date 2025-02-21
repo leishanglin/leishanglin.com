@@ -12,7 +12,7 @@
 	</button>
 </div>`;
 
-  document.querySelector('#pageHeader .right-wrapper').innerHTML =
+  document.querySelector('#pageHeader .right-wrapper .theme-switch').innerHTML =
     themeToggleHtml;
 
   function setActive(name) {
@@ -63,4 +63,9 @@
     const theme = localStorage.getItem('theme') || 'system';
     setActive(theme);
   });
+}
+
+// 语言切换
+{
+
 }

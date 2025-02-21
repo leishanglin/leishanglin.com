@@ -22,6 +22,8 @@
       "lang": "en",
       "dirName": "en",
       "blogName": "Blog",
+      "nextLang": "zh-CN",
+      "nextLangType": "Zh",
       "author": "leishanglin",
       "createdWords": "Created On",
       "updatedWords": "Updated On"
@@ -30,6 +32,8 @@
       "lang": "zh-CN",
       "dirName": "zh-CN",
       "blogName": "博客",
+      "nextLang": "en",
+      "nextLangType": "En",
       "author": "雷尚林",
       "createdWords": "创建于",
       "updatedWords": "更新于"
@@ -37,11 +41,6 @@
   ],
 
   "validate": {
-    "ignoreFilePaths": [
-      "sitemap.xml",
-      "index.md",
-      "404.md",
-      "blogs.json"
-    ]
+    "ignoreFilePaths": ["sitemap.xml", "index.md", "404.md", "blogs.json"]
   }
 }

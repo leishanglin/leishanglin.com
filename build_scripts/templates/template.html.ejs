@@ -168,7 +168,15 @@
 
       <!-- The right side. -->
       <div class="right-wrapper">
-        <button id="themeToggleBtn">toggle</button>
+        <a
+          class="lang-switch"
+          title="Switch to <%= nextLang %>"
+          href="<%= `${nextHtmlPath}.html` %>"
+          target="_self"
+          style="text-decoration: none; margin-right: 1.25rem"
+          ><%= nextLangType %></a
+        >
+        <div class="theme-switch"></div>
       </div>
     </header>
 
@@ -178,8 +186,10 @@
         <h1><%= title %></h1>
         <div id="dateContainer">
           <span>
-            <a href="/me/resume.html" title="author"><%= author %></a
-            >&nbsp;&nbsp;<%= updatedWords %>：<time datetime="<%= datePublished %>"
+            <a href="<%= `/${dirName}/me/resume.html` %>" title="author"
+              ><%= author %></a
+            >&nbsp;&nbsp;<%= updatedWords %>：<time
+              datetime="<%= datePublished %>"
               ><%= dateModified %></time
             >
           </span>
@@ -241,24 +251,23 @@
     <script src="/scripts/index.js"></script>
 
     <% if(hasCodeBlock) { %>
-      <!-- Syntax highlighting for code blocks. -->
-      <script src="/scripts/highlight.min.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          hljs.highlightAll();
-        });
-      </script>
-    <% } %> 
-    <% if(isProd) { %>
-      <!-- Used for Vercel-speed-insights -->
-      <script>
-        window.si =
-          window.si ||
-          function () {
-            (window.siq = window.siq || []).push(arguments);
-          };
-      </script>
-      <script defer src="/_vercel/speed-insights/script.js"></script>
+    <!-- Syntax highlighting for code blocks. -->
+    <script src="/scripts/highlight.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        hljs.highlightAll();
+      });
+    </script>
+    <% } %> <% if(isProd) { %>
+    <!-- Used for Vercel-speed-insights -->
+    <script>
+      window.si =
+        window.si ||
+        function () {
+          (window.siq = window.siq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
     <% } %>
   </body>
 </html>

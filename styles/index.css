@@ -80,6 +80,13 @@ html {
 #pageHeader .right-wrapper .theme-toggle .theme-btn.system {
   right: 1px;
 }
+#pageHeader .lang-switch {
+  font-size: 0.875rem;
+  color: var(--fgColor-muted);
+}
+#pageHeader .lang-switch:hover {
+  color: var(--fgColor-default);
+}
 :root.dark #pageHeader .right-wrapper .theme-toggle {
   --theme-btn-border-color: #2e2e2e;
 }

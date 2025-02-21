@@ -172,7 +172,11 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
       const fileStat = await fs.stat(fileOriginFullPath);
       const createdAt = fileStat.birthtime;
       const updatedAt = fileStat.mtime;
-      let htmlPath = `/${metaConfig.dirName}/${fileRelativePath.replace(
+      const htmlPath = `/${metaConfig.dirName}/${fileRelativePath.replace(
+        /\.md$/,
+        '',
+      )}`;
+      const nextHtmlPath = `/${metaConfig.nextLang}/${fileRelativePath.replace(
         /\.md$/,
         '',
       )}`;
@@ -208,6 +212,9 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
           createdWords: metaConfig.createdWords,
           updatedWords: metaConfig.updatedWords,
           dirName: metaConfig.dirName,
+          nextLang: metaConfig.nextLang,
+          nextLangType: metaConfig.nextLangType,
+          nextHtmlPath,
         },
       );
 
