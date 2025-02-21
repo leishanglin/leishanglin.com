@@ -1,0 +1,47 @@
+{
+  "domain": "https://leishanglin.com",
+  "domainName": "leishanglin.com",
+  "githubName": "https://github.com/leishanglin",
+  "repoName": "leishanglin.com",
+  "outDir": "dist",
+  "htmlTemplatePath": "./templates/template.html.ejs",
+  "robotsTemplatePath": "./templates/robots.txt.ejs",
+  "devDomain": "http://127.0.0.1:8080",
+  "staticFiles": [
+    "images",
+    "scripts",
+    "styles",
+    "favicon.ico",
+    "googleac0b607e7a31c61e.html",
+    "vercel.json",
+    "index.html",
+    "sitemap.xml"
+  ],
+  "versions": [
+    {
+      "lang": "en",
+      "dirName": "en",
+      "blogName": "Blog",
+      "author": "leishanglin",
+      "createdWords": "Created On",
+      "updatedWords": "Updated On"
+    },
+    {
+      "lang": "zh-CN",
+      "dirName": "zh-CN",
+      "blogName": "博客",
+      "author": "雷尚林",
+      "createdWords": "创建于",
+      "updatedWords": "更新于"
+    }
+  ],
+
+  "validate": {
+    "ignoreFilePaths": [
+      "sitemap.xml",
+      "index.md",
+      "404.md",
+      "file-date-map.json"
+    ]
+  }
+}

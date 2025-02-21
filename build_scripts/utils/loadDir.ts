@@ -22,7 +22,7 @@ export const loadDir = async (dirPath: string) => {
       if (entry.isDirectory()) {
         await traverse(fullPath);
       } else if (entry.isFile()) {
-        // 不处理 MacOS 中的 .DS_Store 文件
+        // Do not process the .DS_Store file in macOS.
         if (relativePath.endsWith('.DS_Store')) {
           continue;
         }

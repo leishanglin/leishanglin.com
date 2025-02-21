@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<!-- 使用HTML5的DOCTYPE声明，确保浏览器以标准模式渲染页面 -->
-<!-- 设置html标签的lang属性，指定页面内容的语言为中文（简体），有助于搜索引擎理解页面内容的目标受众 -->
+<!-- Use the HTML5 DOCTYPE declaration to ensure that the browser renders the page in standards mode. -->
+<!-- The lang attribute of the HTML tag is used to specify the language of the page content, which helps search engines understand the target audience of the page. -->
 <html lang="<%= lang %>" style="font-size: 16px">
   <head>
-    <!-- 指定字符集，确保搜索引擎正确解析 -->
+    <!-- Specify the character set as UTF-8 to ensure that search engines correctly parse the content. -->
     <meta charset="UTF-8" />
 
-    <!-- 设置viewport，确保页面在移动设备上正确显示，提升移动端用户体验 -->
+    <!-- Set the viewport to ensure the page displays correctly on mobile devices and improves the mobile user experience. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 标题（尽量包含主关键词，且控制在 60 个字符以内） -->
+    <!-- Title (try to include the main keyword and keep it under 60 characters) -->
     <title><%= title %> | <%= domainName %></title>
 
-    <!-- 关键词（现代搜索引擎主要依赖内容，但仍可参考） -->
+    <!-- Keywords (modern search engines mainly rely on content, but they can still be considered as a reference) -->
     <meta name="keywords" content="<%= keywords %>" />
 
-    <!-- 页面描述（搜索引擎 SERP 结果会展示，建议 150 字以内，包含核心关键词） -->
+    <!-- Page description (will be displayed in search engine SERP results, recommended to be under 150 characters and include core keywords) -->
     <meta name="description" content="<%= description %>" />
 
-    <!-- 定义当前页面的主题 -->
+    <!-- Define the theme of the current page -->
     <meta name="color-scheme" content="light dark" />
 
-    <!-- 允许搜索引擎索引和跟随链接 -->
+    <!-- Allow search engines to index and follow links -->
     <meta name="robots" content="index, follow" />
 
-    <!-- 作者信息，虽然不是SEO的核心因素，但有助于展示页面内容的来源 -->
+    <!-- Author information, though not a core SEO factor, helps to showcase the source of the page content. -->
     <meta name="author" content="<%= author %>" />
 
-    <!-- Canonical URL（避免重复内容被搜索引擎误判，以此告诉搜索引擎，这份内容的“正版”来源URL是这个，避免权重分散） -->
+    <!-- Canonical URL (to prevent duplicate content from being misjudged by search engines, this tells them the ‘original’ source URL of the content, avoiding the dilution of link equity) -->
     <link rel="canonical" href="<%= domain %><%= path %>.html" />
 
     <!-- Open Graph (Facebook, Twitter, LinkedIn) -->
@@ -46,14 +46,14 @@
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="alternate icon" type="image/png" href="/images/favicon.png" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-    <!-- 苹果 iOS 设备的桌面图标不支持 SVG，因此使用 png -->
+    <!-- The desktop icons on Apple iOS devices do not support SVG, so PNG is used instead. -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/images/large-favicon.png"
     />
 
-    <!-- 结构化数据（JSON-LD） -->
+    <!-- Structured data (JSON-LD) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -80,21 +80,20 @@
       }
     </script>
 
-    <!-- 预加载关键资源 -->
+    <!-- Preload critical resources -->
     <link rel="preload" href="/styles/index.css" as="style" />
     <link rel="preload" href="/styles/github-markdown.min.css" as="style" />
     <link rel="preload" href="/scripts/index.js" as="script" />
 
-    <!-- 样式表 -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/styles/github-markdown.min.css" />
 
     <% if(hasCodeBlock) { %>
-    <!-- 代码块高亮样式 -->
+    <!-- Code block syntax highlighting style -->
     <link rel="stylesheet" href="/styles/hljs-theme-github.min.css" />
-    <!-- <link rel="stylesheet" href="/styles/hljs-theme-github-dark.min.css" /> -->
     <% } %>
 
-    <!-- 注意顺序，用于定义一些自定义组件的样式，以及重置一些前面加载的样式表的一些默认样式 -->
+    <!-- Pay attention to the order, as it defines styles for custom components and resets the default styles from previously loaded stylesheets. -->
     <link rel="stylesheet" href="/styles/index.css" />
 
     <style>
@@ -136,7 +135,7 @@
     </style>
 
     <script>
-      // 主题切换
+      // Theme switching
       const theme = localStorage.getItem('theme') || 'system';
       const rootElement = document.documentElement;
       switch (theme) {
@@ -159,35 +158,35 @@
   </head>
 
   <body>
-    <!-- 使用语义化标签（header），帮助搜索引擎理解页面结构 -->
+    <!-- Use semantic tags (like <header>) to help search engines understand the page structure. -->
     <header id="pageHeader">
-      <!-- 左侧的 Logo 和 网站名称 -->
+      <!-- The logo and website name on the left side. -->
       <a class="logo-title" href="/" target="_self">
-        <img class="logo" alt="网站图标" src="/images/logo.svg" />
-        <span class="title">博客</span>
+        <img class="logo" alt="website logo" src="/images/logo.svg" />
+        <span class="title"><%= blogName %></span>
       </a>
 
-      <!-- 右侧 -->
+      <!-- The right side. -->
       <div class="right-wrapper">
         <button id="themeToggleBtn">toggle</button>
       </div>
     </header>
 
-    <!-- 使用main标签包裹主要内容，帮助搜索引擎识别页面的核心内容 -->
+    <!-- Use the <main> tag to wrap the main content, helping search engines identify the core content of the page. -->
     <main id="pageMain">
       <article id="md">
         <h1><%= title %></h1>
         <div id="dateContainer">
           <span>
-            <a href="/me/resume.html" title="author"><%= chineseName %></a
-            >&nbsp;&nbsp;更新于：<time datetime="<%= datePublished %>"
+            <a href="/me/resume.html" title="author"><%= author %></a
+            >&nbsp;&nbsp;<%= updatedWords %>：<time datetime="<%= datePublished %>"
               ><%= dateModified %></time
             >
           </span>
 
           <div class="right-wrapper">
             <span>
-              创建于：<time datetime="<%= datePublished %>"
+              <%= createdWords %>：<time datetime="<%= datePublished %>"
                 ><%= datePublished %></time
               >
             </span>
@@ -224,8 +223,8 @@
       </article>
     </main>
 
-    <!-- 使用footer标签包裹页脚内容，帮助搜索引擎识别页脚信息 -->
-    <!-- 注意: nofollow 可以防止搜索引擎传递权重 -->
+    <!-- Use the <footer> tag to wrap the footer content, helping search engines recognize the footer information. -->
+    <!-- Note: rel="nofollow" can prevent search engines from passing link equity. -->
     <footer id="pageFooter">
       <p class="copyright">
         &copy; 2025
@@ -237,39 +236,29 @@
           ><%= domainName %></a
         >. All rights reserved.
       </p>
-
-      <!-- 目前主要面向境外访问，所以不需要展示这个 -->
-      <!-- <a
-        class="beian"
-        href="https://beian.miit.gov.cn/"
-        rel="nofollow"
-        target="_blank"
-      >
-        蜀ICP备19033276号
-      </a> -->
     </footer>
 
-    <!-- defer 避免阻塞 -->
     <script src="/scripts/index.js"></script>
 
     <% if(hasCodeBlock) { %>
-    <!-- 代码块语法高亮 -->
-    <script src="/scripts/highlight.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        hljs.highlightAll();
-      });
-    </script>
-    <% } %> <% if(isProd) { %>
-    <!-- For Vercel-speed-insights -->
-    <script>
-      window.si =
-        window.si ||
-        function () {
-          (window.siq = window.siq || []).push(arguments);
-        };
-    </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
+      <!-- Syntax highlighting for code blocks. -->
+      <script src="/scripts/highlight.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          hljs.highlightAll();
+        });
+      </script>
+    <% } %> 
+    <% if(isProd) { %>
+      <!-- Used for Vercel-speed-insights -->
+      <script>
+        window.si =
+          window.si ||
+          function () {
+            (window.siq = window.siq || []).push(arguments);
+          };
+      </script>
+      <script defer src="/_vercel/speed-insights/script.js"></script>
     <% } %>
   </body>
 </html>
