@@ -207,6 +207,7 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
           blogName: metaConfig.blogName,
           createdWords: metaConfig.createdWords,
           updatedWords: metaConfig.updatedWords,
+          dirName: metaConfig.dirName,
         },
       );
 
