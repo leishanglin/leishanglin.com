@@ -1,7 +1,6 @@
 {
   "rewrites": [
     { "source": "/zh-CN/(.*)", "destination": "/zh-CN/404.html" },
-    { "source": "/en/(.*)", "destination": "/en/404.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/en/(.*)", "destination": "/en/404.html" }
   ]
 }
