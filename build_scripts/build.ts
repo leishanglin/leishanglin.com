@@ -6,7 +6,6 @@ import * as fs from 'node:fs/promises';
 import ejs from 'ejs';
 import { minify } from 'html-minifier-terser';
 import dayjs from 'dayjs';
-import { SitemapStream, streamToPromise } from 'sitemap';
 import config from './build.config.json';
 import { existsSync } from 'fs';
 
@@ -14,9 +13,29 @@ export type MetaConfigType = (typeof config.versions)[number];
 
 const validateConfig = config.validate;
 
-export const build = async (metaConfig: MetaConfigType) => {
-  const { MODE } = process.env;
-  const isProd = MODE === 'production';
+const changefreqPriorityMap = <const>{
+  hourly: 1.0,
+  daily: 1.0,
+  weekly: 0.8,
+  monthly: 0.6,
+  yearly: 0.4,
+  never: 0.2,
+};
+
+type ChangefreqType = keyof typeof changefreqPriorityMap;
+
+type PriorityType = (typeof changefreqPriorityMap)[ChangefreqType];
+
+export type BlogInfo = {
+  path: string;
+  url: string;
+  changefreq: ChangefreqType;
+  lastmod: string;
+  priority: PriorityType;
+  create: string;
+};
+
+export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
   const AUTHOR = metaConfig.author;
   const NOTES_DIR = `../${metaConfig.dirName}`;
   const DOMAIN = isProd ? config.domain : config.devDomain;
@@ -30,14 +49,6 @@ export const build = async (metaConfig: MetaConfigType) => {
   const filesMap = await loadDir(notesDirPath);
   const dirCheckMap: Record<string, boolean> = {};
 
-  const changefreqPriorityMap = <const>{
-    hourly: 1.0,
-    daily: 1.0,
-    weekly: 0.8,
-    monthly: 0.6,
-    yearly: 0.4,
-    never: 0.2,
-  };
   const changefreqKeys = Object.keys(changefreqPriorityMap);
   const markdownMetaDataKeys = [
     'title',
@@ -46,28 +57,18 @@ export const build = async (metaConfig: MetaConfigType) => {
     'changefreq',
   ];
 
-  type ChangefreqType = keyof typeof changefreqPriorityMap;
-  type PriorityType = (typeof changefreqPriorityMap)[ChangefreqType];
-  type FileDate = { create: string; update: string };
+  const tempBlogs: BlogInfo[] = [];
+  let currentBlogs: BlogInfo[] = [];
 
-  const fileDateMap: Record<string, FileDate> = {};
-  let originDateMap: Record<string, FileDate> = {};
-
-  // The reason for the existence of file-date-map.json is to address the issue of missing file creation
+  // The reason for the existence of blogs.json is to address the issue of missing file creation
   // and modification timestamps during Vercel’s containerized build process.
-  if (existsSync(path.join(notesDirPath, 'file-date-map.json'))) {
+  if (existsSync(path.resolve(notesDirPath, 'blogs.json'))) {
     const rawData = (
-      await fs.readFile(path.join(notesDirPath, 'file-date-map.json'))
-    ).toString();
-    originDateMap = JSON.parse(rawData);
+      await fs.readFile(path.resolve(notesDirPath, 'blogs.json'))
+    ).toString('utf-8');
+    currentBlogs = JSON.parse(rawData);
   }
 
-  const sites: {
-    url: string;
-    changefreq: ChangefreqType;
-    lastmod: string;
-    priority: PriorityType;
-  }[] = [];
   const usedFiles: string[] = [];
 
   const renderer = new marked.Renderer();
@@ -177,15 +178,13 @@ export const build = async (metaConfig: MetaConfigType) => {
       )}`;
       let createTime = dayjs(createdAt).format('YYYY-MM-DD');
       let updateTime = dayjs(updatedAt).format('YYYY-MM-DD');
-      // Store it for later use (Vercel Build).
-      fileDateMap[fileRelativePath] = {
-        create: createTime,
-        update: updateTime,
-      };
 
       // For page rendering.
-      createTime = originDateMap[fileRelativePath]?.create || createTime;
-      updateTime = originDateMap[fileRelativePath]?.update || updateTime;
+      const targetItem = currentBlogs.find(
+        (blog) => blog.path === fileRelativePath,
+      );
+      createTime = targetItem?.create || createTime;
+      updateTime = targetItem?.lastmod || updateTime;
 
       const renderedRawHtml = await ejs.renderFile(
         path.resolve(__dirname, config.htmlTemplatePath),
@@ -224,10 +223,12 @@ export const build = async (metaConfig: MetaConfigType) => {
         isProd ? minifiedRawHtml : renderedRawHtml,
         'utf-8',
       );
-      sites.push({
+      tempBlogs.push({
+        path: fileRelativePath,
         url: `${DOMAIN}${htmlPath}.html`,
         changefreq: dataObj.data.changefreq,
         lastmod: dayjs(updatedAt).format('YYYY-MM-DD hh:mm:ss'),
+        create: dayjs(createdAt).format('YYYY-MM-DD hh:mm:ss'),
         priority:
           changefreqPriorityMap[dataObj.data.changefreq as ChangefreqType],
       });
@@ -251,21 +252,17 @@ export const build = async (metaConfig: MetaConfigType) => {
     );
   }
 
-  // Generate a sitemap.xml file.
-  if (isProd) {
-    const sitemap = new SitemapStream({ hostname: DOMAIN });
-    sites.forEach((site) => {
-      sitemap.write(site);
-    });
-    sitemap.end();
-    const sitemapXml = await streamToPromise(sitemap);
-    fs.writeFile(path.join(notesDirPath, 'sitemap.xml'), sitemapXml);
-  }
-
-  // Generate a file-date-map.json file.
+  // Generate a blogs.json file.
+  const finalBlogs = tempBlogs.map((item) => {
+    const targetBlog = currentBlogs.find((blog) => blog.path === item.path);
+    if (targetBlog) {
+      item.create = targetBlog.create;
+    }
+    return item;
+  });
   fs.writeFile(
-    path.join(notesDirPath, 'file-date-map.json'),
-    JSON.stringify(fileDateMap),
+    path.join(notesDirPath, 'blogs.json'),
+    JSON.stringify(finalBlogs),
   );
 
   // Display the total number of blog posts on the homepage.
@@ -273,7 +270,7 @@ export const build = async (metaConfig: MetaConfigType) => {
   const fileContent = (await fs.readFile(indexFilePath)).toString('utf-8');
   const newFileContent = fileContent.replace(
     '[[blogTotalNumber]]',
-    sites.length.toString(),
+    tempBlogs.length.toString(),
   );
   await fs.writeFile(indexFilePath, newFileContent);
 };
