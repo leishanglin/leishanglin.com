@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "cross-env MODE=production vite-node ./build_scripts/index.ts",
-    "test": "cross-env MODE=development vite-node ./build_scripts/index.ts",
-    "seo": "lighthouse https://leishanglin.com"
+    "test": "cross-env MODE=development vite-node ./build_scripts/index.ts"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
@@ -19,9 +18,7 @@
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3",
     "html-minifier-terser": "^7.2.0",
-    "lighthouse": "^12.3.0",
     "marked": "^15.0.7",
-    "nodemon": "^3.1.7",
     "sitemap": "^8.0.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.0",
