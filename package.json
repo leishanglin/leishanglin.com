@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "cross-env MODE=production vite-node ./build_scripts/index.ts",
-    "test": "cross-env MODE=development vite-node ./build_scripts/index.ts"
+    "dev": "cross-env MODE=development vite-node ./build_scripts/index.ts"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",

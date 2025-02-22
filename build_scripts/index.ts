@@ -31,6 +31,7 @@ fs.writeFile(
 );
 
 const blogs: BlogInfo[] = [];
+const blogsMap: Record<string, BlogInfo[]> = {};
 
 for (const version of config.versions) {
   await build(version, isProd);
@@ -41,7 +42,9 @@ for (const version of config.versions) {
       path.resolve(__dirname, `../${version.dirName}/blogs.json`),
     )
   ).toString('utf-8');
-  blogs.push(...JSON.parse(rawBlogs));
+  const tempBlogs = JSON.parse(rawBlogs);
+  blogs.push(...tempBlogs);
+  blogsMap[version.dirName] = tempBlogs;
 
   if (existsSync(path.resolve(outDirPath, `${version.dirName}/blogs.json`))) {
     fs.rm(path.resolve(outDirPath, `${version.dirName}/blogs.json`));
@@ -68,3 +71,19 @@ sitemap.write({
 sitemap.end();
 const sitemapXml = await streamToPromise(sitemap);
 fs.writeFile(path.join(outDirPath, 'sitemap.xml'), sitemapXml);
+
+// Check if the documents in different language versions correspond to each other correctly.
+const specialFiles: string[] = [];
+for (const item of blogsMap['en']) {
+  if (blogsMap['zh-CN'].every((record) => item.path !== record.path)) {
+    specialFiles.push(`./en/${item.path}`);
+  }
+}
+for (const item of blogsMap['zh-CN']) {
+  if (blogsMap['en'].every((record) => item.path !== record.path)) {
+    specialFiles.push(`./zh-CN/${item.path}`);
+  }
+}
+if (specialFiles.length) {
+  throw new Error(`Found Special files: \n${specialFiles.join('\n')}`);
+}
