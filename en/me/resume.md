@@ -8,7 +8,7 @@ changefreq: "weekly"
 I haven’t decided how to write it yet, so I’ll just leave a placeholder for now.
 <br />
 
-My contact information:
+Contact me:
 
 - Email: <aisowe@sina.com>
 - WeChat: reasonly8
