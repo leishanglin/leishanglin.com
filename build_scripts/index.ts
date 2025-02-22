@@ -48,10 +48,22 @@ for (const version of config.versions) {
   }
 }
 
+// Generate a root index.html
+const enIndexContent = await fs.readFile(
+  path.resolve(outDirPath, './en/index.html'),
+);
+await fs.writeFile(path.join(outDirPath, './index.html'), enIndexContent);
+
 // Generate a sitemap.xml file.
 const sitemap = new SitemapStream({ hostname: config.domain });
 blogs.forEach((blog) => {
   sitemap.write(blog);
+});
+sitemap.write({
+  url: `${config.domain}/index.html`,
+  changefreq: 'monthly',
+  lastmod: '2025-02-22',
+  priority: 1.0,
 });
 sitemap.end();
 const sitemapXml = await streamToPromise(sitemap);
