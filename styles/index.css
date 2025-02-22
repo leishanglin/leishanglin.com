@@ -78,7 +78,7 @@ html {
   left: -1px;
 }
 #pageHeader .right-wrapper .theme-toggle .theme-btn.system {
-  right: 1px;
+  right: -1px;
 }
 #pageHeader .lang-switch {
   font-size: 0.875rem;

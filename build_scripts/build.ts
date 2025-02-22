@@ -233,7 +233,7 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
       );
       tempBlogs.push({
         path: fileRelativePath,
-        url: `${DOMAIN}${htmlPath}.html`,
+        url: `${config.domain}${htmlPath}.html`,
         changefreq: dataObj.data.changefreq,
         lastmod: dayjs(updatedAt).format('YYYY-MM-DD hh:mm:ss'),
         create: dayjs(createdAt).format('YYYY-MM-DD hh:mm:ss'),

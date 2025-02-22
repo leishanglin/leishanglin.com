@@ -132,6 +132,11 @@
           padding: 15px;
         }
       }
+      @media (max-width: 436px) {
+        .created-date-wrapper {
+          display: none;
+        }
+      }
     </style>
 
     <script>
@@ -173,7 +178,7 @@
           title="Switch to <%= nextLang %>"
           href="<%= `${nextHtmlPath}.html` %>"
           target="_self"
-          style="text-decoration: none; margin-right: 1.25rem"
+          style="text-decoration: none; margin-right: 0.875rem"
           ><%= nextLangType %></a
         >
         <div class="theme-switch"></div>
@@ -195,7 +200,7 @@
           </span>
 
           <div class="right-wrapper">
-            <span>
+            <span class="created-date-wrapper">
               <%= createdWords %>：<time datetime="<%= datePublished %>"
                 ><%= datePublished %></time
               >
@@ -204,6 +209,8 @@
               href="<%= `${githubName}/${repoName}/${githubSourceFilePath}` %>"
               target="_blank"
               rel="nofollow"
+              name="link to github"
+              title="Link to my github homepage."
               style="
                 display: inline-flex;
                 align-items: center;
