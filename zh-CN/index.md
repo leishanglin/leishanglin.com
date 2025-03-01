@@ -11,4 +11,5 @@ changefreq: 'daily'
 
 ## 分类
 
+- [Git: 一个分布式版本管理系统](/zh-CN/git/index.md)
 - [关于我，关于这个网站](/zh-CN/me/index.md)

@@ -11,4 +11,5 @@ Total number of blog posts：**[[blogTotalNumber]]**
 
 ## Categories
 
-- [Me: About me, About this website](/en/me/index.md)
+- [Git: A distributed version control system.](/en/git/index.md)
+- [Me: About me, About this website.](/en/me/index.md)
