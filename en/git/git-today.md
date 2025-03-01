@@ -1,5 +1,5 @@
 ---
-title: 'git-today: A Simple Script to Help Me Fill Out My Daily Report'
+title: 'git-today: A Script to Help Me Fill Out Daily Report'
 keywords: 'git-today, git log, daily report, bash script'
 description: 'This is an article about the practical application of git log.'
 changefreq: 'monthly'
