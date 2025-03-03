@@ -12,4 +12,4 @@ This repository stores my blog posts, Welcome to visit: https://leishanglin.com
 - Create a tile-laying game. 🎮🧩
 - Plant a pot of blueberries. 🫐🌿
 - Make a small solid wood stool. 🪑🔨
-- Completed It Takes Two with my wife.
+- Completed `It Takes Two` with my wife.
