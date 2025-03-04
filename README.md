@@ -14,3 +14,4 @@ This repository stores my blog posts, Welcome to visit: https://leishanglin.com
 - Make a small solid wood stool. 🪑🔨
 - Completed `It Takes Two` with my wife.
 - Implemented a three-level draggable tree.
+- Weave a small bamboo basket 🎋🎒.
