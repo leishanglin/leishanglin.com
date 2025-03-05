@@ -99,12 +99,6 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
     // Add the semantic <figure> tag and enable lazy loading for the image (loading="lazy").
     return `<figure><img src="${image.href}" alt="${image.text}" loading="lazy" /><figcaption>${image.text}</figcaption></figure>`;
   };
-  let hasCodeBlock = false;
-  // Custom code block rendering logic
-  renderer.code = (config: marked.Tokens.Code): string => {
-    hasCodeBlock = true;
-    return marked.Renderer.prototype.code.call(this, config);
-  };
 
   // Custom link rendering logic
   renderer.link = (config: marked.Tokens.Link) => {
@@ -137,6 +131,13 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
     );
     const fileFullPath = path.resolve(notePrefixPath, fileRelativePath);
     const fileDir = path.dirname(fileFullPath);
+
+    let hasCodeBlock = false;
+    // Custom code block rendering logic
+    renderer.code = (config: marked.Tokens.Code): string => {
+      hasCodeBlock = true;
+      return marked.Renderer.prototype.code.call(this, config);
+    };
 
     if (!dirCheckMap[fileDir]) {
       await fs.mkdir(fileDir, { recursive: true });
