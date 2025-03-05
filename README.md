@@ -15,3 +15,4 @@ This repository stores my blog posts, Welcome to visit: https://leishanglin.com
 - Completed `It Takes Two` with my wife.
 - Implemented a three-level draggable tree.
 - Weave a small bamboo basket 🎋🎒.
+- Write a blog post about memory-spiral 🖋.
