@@ -29,9 +29,9 @@ const value = defineModel('value', {
 </template>
 ```
 
-In the example above, I re-packaged the <Switch /> component with the aim of changing the original v-model:checked to v-model:value. This is useful for dynamically rendering forms (because it standardizes the two-way data binding).
+In the example above, I re-packaged the `<Switch />` component with the aim of changing the original v-model:checked to v-model:value. This is useful for dynamically rendering forms (because it standardizes the two-way data binding).
 
-However, I wasn’t sure how to “inherit” the built-in slots of the <Switch /> component. The following approach is something I can’t accept (because it’s too cumbersome):
+However, I wasn’t sure how to “inherit” the built-in slots of the `<Switch />` component. The following approach is something I can’t accept (because it’s too cumbersome):
 
 ```html
 <template>
