@@ -271,7 +271,7 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
   });
   fs.writeFile(
     path.join(notesDirPath, 'blogs.json'),
-    JSON.stringify(finalBlogs),
+    JSON.stringify(finalBlogs, null, 2),
   );
 
   // Display the total number of blog posts on the homepage.
