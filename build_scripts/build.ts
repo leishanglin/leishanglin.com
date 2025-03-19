@@ -143,7 +143,20 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
     // Custom code block rendering logic
     renderer.code = (config: marked.Tokens.Code): string => {
       hasCodeBlock = true;
-      return marked.Renderer.prototype.code.call(this, config);
+
+      // return marked.Renderer.prototype.code.call(this, config);
+      const escapedCode = config.text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+      const rawCode = encodeURIComponent(config.text);
+
+      return `<pre data-raw="${rawCode}"><code class="language-${
+        config.lang || 'plaintext'
+      }">${escapedCode}</code></pre>`;
     };
 
     if (!dirCheckMap[fileDir]) {
