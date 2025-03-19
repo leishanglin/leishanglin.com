@@ -7,7 +7,7 @@ changefreq: 'monthly'
 
 ## Background
 
-Converting bytes to KB, MB, GB, TB, etc., is a common requirement, and there are various ways to implement it. This article lists four common methods, with the fourth method, [the BigInt version](#method-4-bigint-recommended), being the most recommended.
+Converting bytes to KB, MB, GB, TB, etc., is a common requirement, and there are various ways to implement it. This article lists four common methods, with the fourth method, [the BigInt version](#methodFour), being the most recommended.
 
 ## Method 1: if else
 
@@ -137,7 +137,7 @@ Number.MAX_SAFE_INTEGER === Math.pow(2, 53) - 1; // true
 Number.MIN_SAFE_INTEGER === -(2 ** 53 - 1); // true
 ```
 
-## Method 4: BigInt (Recommended)
+<h2 id="methodFour">Method 4: BigInt (Recommended)</h2>
 
 If you’re careful enough, you’ll notice that the maximum value our formatBytes can handle is around 8.00 PB, which is `Number.MAX_SAFE_INTEGER` bytes. Any value larger than that will lose precision:
 

@@ -7,7 +7,7 @@ changefreq: monthly
 
 ## 背景
 
-将字节（Bytes）转成 KB、MB、GB、TB 等，是十分常见的需求，它的实现方法有多种，本文列出了常见的四种实现，最推荐的是第4种：[BigInt 版](#方法-4-bigint推荐)。
+将字节（Bytes）转成 KB、MB、GB、TB 等，是十分常见的需求，它的实现方法有多种，本文列出了常见的四种实现，最推荐的是第4种：[BigInt 版](#methodFour)。
 
 ## 方法1：if else
 
@@ -138,7 +138,7 @@ Number.MAX_SAFE_INTEGER === Math.pow(2, 53) - 1; // true
 Number.MIN_SAFE_INTEGER === -(2 ** 53 - 1); // true
 ```
 
-## 方法 4: BigInt(推荐)
+<h2 id="methodFour">方法 4: BigInt(推荐)</h2>
 
 如果你足够细心，会发现我们的 formatBytes 能够处理的最大数量大约是 `8.00 PB`，也就是 `Number.MAX_SAFE_INTEGER` 个字节，再大就会丢失精度：
 
