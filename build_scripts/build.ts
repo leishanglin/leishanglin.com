@@ -78,7 +78,8 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
     if (
       !url.startsWith('http') &&
       !url.startsWith('/') &&
-      !url.startsWith('mailto')
+      !url.startsWith('mailto') &&
+      !url.startsWith('#')
     ) {
       throw new Error(`validateUrl Error: \`${url}\` is invalid.`);
     }

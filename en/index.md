@@ -11,6 +11,7 @@ Total number of blog posts：**[[blogTotalNumber]]**
 
 ## Categories
 
+- [TypeScript: A superset of JavaScript that provides a robust static type system.](/en/ts/index.md)
 - [Vue.js: A progressive JavaScript framework for building user interfaces.](/en/vue/index.md)
 - [Git: A distributed version control system.](/en/git/index.md)
 - [Me: About me, About this website.](/en/me/index.md)

@@ -11,6 +11,7 @@ changefreq: 'daily'
 
 ## 分类
 
+- [TypeScript：JavaScript 的超集，提供完善的静态类型系统](/zh-CN/ts/index.md)
 - [Vue.js：一个渐进式的 JavaScript 视图层框架](/zh-CN/vue/index.md)
 - [Git：一个分布式版本管理系统](/zh-CN/git/index.md)
 - [关于我，关于这个网站](/zh-CN/me/index.md)
