@@ -117,6 +117,12 @@ export const build = async (metaConfig: MetaConfigType, isProd: boolean) => {
       } target="_self">${text}</a>`;
     }
 
+    if (href.startsWith('#')) {
+      return `<a href="${href}" ${
+        title ? `title="${title}"` : ''
+      } target="_self">${text}</a>`;
+    }
+
     return `<a href="${href}" ${
       title ? `title="${title}"` : ''
     } target="_blank" ref="nofollow">${text}</a>`;
