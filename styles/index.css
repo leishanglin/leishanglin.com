@@ -170,7 +170,7 @@ pre[data-raw] i.copied {
   background-color: var(--bgColor-neutral-muted);
 }
 pre[data-raw] i.copied::before {
-  content: '已复制';
+  content: 'Copied';
   position: absolute;
   font-size: 12px;
   background-color: var(--bgColor-neutral-muted);
@@ -181,4 +181,7 @@ pre[data-raw] i.copied::before {
   align-items: center;
   justify-content: center;
   border-radius: 4px 0 0 4px;
+}
+:root[lang='zh-CN'] pre[data-raw] i.copied::before {
+  content: '已复制';
 }
