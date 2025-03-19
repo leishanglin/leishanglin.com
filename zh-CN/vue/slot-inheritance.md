@@ -7,7 +7,7 @@ changefreq: 'monthly'
 
 ## 背景
 
-最近在基于 [Ant Design Vue](https://antdv.com/components/overview) 做组件的二次封装，以便在表单设计器中使用。这些经过封装的组件长这样：
+最近在基于 [Ant Design Vue](https://antdv.com/components/overview-cn) 做组件的二次封装，以便在表单设计器中使用。这些经过封装的组件长这样：
 
 ```html
 <script setup>

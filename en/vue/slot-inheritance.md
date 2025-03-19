@@ -51,7 +51,7 @@ However, I wasn’t sure how to “inherit” the built-in slots of the `<Switch
 
 ## Solution
 
-After reading the section on [slots](https://cn.vuejs.org/guide/components/slots.html#dynamic-slot-names) in the official Vue documentation, I found a way to "inherit" the built-in slots of a component. The method is: use `useSlots` to get all the slots and then dynamically render them inside the component using `v-for`:
+After reading the section on [slots](https://vuejs.org/guide/components/slots.html#dynamic-slot-names) in the official Vue documentation, I found a way to "inherit" the built-in slots of a component. The method is: use `useSlots` to get all the slots and then dynamically render them inside the component using `v-for`:
 
 ```html
 <script setup>
