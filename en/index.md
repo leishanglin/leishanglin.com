@@ -7,7 +7,7 @@ changefreq: 'daily'
 
 This is my personal website, used for a blog, resume, portfolio, and more. It is hosted on Vercel, and the source code (including article files) is publicly available on GitHub.
 
-Total number of blog posts：**[[blogTotalNumber]]**
+Total blogs：**[[blogTotalNumber]]**
 
 ## Categories
 
