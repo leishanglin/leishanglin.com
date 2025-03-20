@@ -1,5 +1,5 @@
 ---
-title: 'Vue: Implementing “slot inheritance” with dynamic slot names'
+title: 'Vue: Implementing "Slot Inheritance" With Dynamic Slot Names'
 keywords: 'dynamic slot names, Component Wrapping, slot inheritance, $slots, useSlots'
 description: 'This is a blog post in which the author provides a method for slot inheritance in Vue, which is useful when re-packaging components.'
 changefreq: 'monthly'
