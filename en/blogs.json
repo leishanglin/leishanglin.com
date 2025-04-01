@@ -11,7 +11,7 @@
     "path": "chrome/index.md",
     "url": "https://leishanglin.com/en/chrome/index.html",
     "changefreq": "weekly",
-    "lastmod": "2025-04-01 01:07:01",
+    "lastmod": "2025-04-01 01:20:25",
     "create": "2025-04-01 01:02:57",
     "priority": 0.8
   },
@@ -19,7 +19,7 @@
     "path": "chrome/proxy-lan-caused-site-cant-be-reached.md",
     "url": "https://leishanglin.com/en/chrome/proxy-lan-caused-site-cant-be-reached.html",
     "changefreq": "yearly",
-    "lastmod": "2025-04-01 01:16:52",
+    "lastmod": "2025-04-01 01:20:25",
     "create": "2025-04-01 01:02:57",
     "priority": 0.4
   },
@@ -43,7 +43,7 @@
     "path": "index.md",
     "url": "https://leishanglin.com/en/index.html",
     "changefreq": "daily",
-    "lastmod": "2025-04-01 01:19:31",
+    "lastmod": "2025-04-01 02:09:17",
     "create": "2025-02-21 11:40:16",
     "priority": 1
   },
@@ -64,6 +64,14 @@
     "priority": 0.8
   },
   {
+    "path": "ts/axios-request-function.md",
+    "url": "https://leishanglin.com/en/ts/axios-request-function.html",
+    "changefreq": "yearly",
+    "lastmod": "2025-04-01 03:38:36",
+    "create": "2025-04-01 03:17:53",
+    "priority": 0.4
+  },
+  {
     "path": "ts/byte-unit-conversion.md",
     "url": "https://leishanglin.com/en/ts/byte-unit-conversion.html",
     "changefreq": "monthly",
@@ -75,7 +83,7 @@
     "path": "ts/index.md",
     "url": "https://leishanglin.com/en/ts/index.html",
     "changefreq": "weekly",
-    "lastmod": "2025-03-19 01:26:40",
+    "lastmod": "2025-04-01 02:12:53",
     "create": "2025-03-19 01:23:55",
     "priority": 0.8
   },
