@@ -11,6 +11,7 @@ changefreq: 'daily'
 
 ## 分类
 
+- [Chrome：目前使用人数最多的浏览器](/zh-CN/chrome/index.md)
 - [TypeScript：JavaScript 的超集，提供完善的静态类型系统](/zh-CN/ts/index.md)
 - [Vue.js：一个渐进式的 JavaScript 视图层框架](/zh-CN/vue/index.md)
 - [Git：一个分布式版本管理系统](/zh-CN/git/index.md)

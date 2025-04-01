@@ -8,6 +8,22 @@
     "priority": 0.4
   },
   {
+    "path": "chrome/index.md",
+    "url": "https://leishanglin.com/zh-CN/chrome/index.html",
+    "changefreq": "weekly",
+    "lastmod": "2025-04-01 01:01:59",
+    "create": "2025-04-01 12:06:46",
+    "priority": 0.8
+  },
+  {
+    "path": "chrome/proxy-lan-caused-site-cant-be-reached.md",
+    "url": "https://leishanglin.com/zh-CN/chrome/proxy-lan-caused-site-cant-be-reached.html",
+    "changefreq": "yearly",
+    "lastmod": "2025-04-01 01:18:13",
+    "create": "2025-04-01 12:14:44",
+    "priority": 0.4
+  },
+  {
     "path": "git/git-today.md",
     "url": "https://leishanglin.com/zh-CN/git/git-today.html",
     "changefreq": "monthly",
@@ -27,7 +43,7 @@
     "path": "index.md",
     "url": "https://leishanglin.com/zh-CN/index.html",
     "changefreq": "daily",
-    "lastmod": "2025-03-19 01:00:43",
+    "lastmod": "2025-04-01 01:01:32",
     "create": "2025-02-12 03:36:48",
     "priority": 1
   },

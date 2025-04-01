@@ -11,6 +11,7 @@ Total blogs：**[[blogTotalNumber]]**
 
 ## Categories
 
+- [Chrome: The most widely used browser at present](/en/chrome/index.md)
 - [TypeScript: A superset of JavaScript that provides a robust static type system.](/en/ts/index.md)
 - [Vue.js: A progressive JavaScript framework for building user interfaces.](/en/vue/index.md)
 - [Git: A distributed version control system.](/en/git/index.md)
