@@ -23,7 +23,6 @@ The reason this issue is hard to pinpoint is that **Safari can access it normall
 
 I’ll dig deeper into this when I have time later.
 
-2025/04/03 Log: The issue was identified as being caused by ClashX Pro hijacking Chrome’s QUIC traffic. The solution is to set 'Experimental QUIC Protocol' to 
-'Disabled'
+2025/04/03 Log: The issue was identified as being caused by ClashX Pro hijacking Chrome’s QUIC traffic. The solution is to set 'Experimental QUIC Protocol' to 'Disabled', Or Set Proxy Mode to "Direct" on ClashX.
 
 See: chrome://flags/#enable-quic

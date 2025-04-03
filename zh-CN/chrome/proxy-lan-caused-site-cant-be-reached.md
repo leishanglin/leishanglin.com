@@ -23,6 +23,6 @@ changefreq: 'yearly'
 
 Todo：后面有空了“深挖”一下。
 
-2025/04/03 记录：定位到问题是由于 ClashX Pro 劫持了 Chrome 的 QUIC 流量造成的，解决方法是：将 Experimental QUIC Protocol 设为“禁用”。
+2025/04/03 记录：定位到问题是由于 ClashX Pro 劫持了 Chrome 的 QUIC 流量造成的，解决方法是：将 Experimental QUIC Protocol 设为“禁用”。或者将 ClashX Pro 的 Proxy Mode 设为 "Direct"。
 
 查看: chrome://flags/#enable-quic
