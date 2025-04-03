@@ -22,3 +22,7 @@ changefreq: 'yearly'
 这个问题不好定位的原因在于：Safari 都可以正常访问，但 Chrome 不行，可问题却出在“系统代理”上。
 
 Todo：后面有空了“深挖”一下。
+
+2025/04/03 记录：定位到问题是由于 ClashX Pro 劫持了 Chrome 的 QUIC 流量造成的，解决方法是：将 Experimental QUIC Protocol 设为“禁用”。
+
+查看: chrome://flags/#enable-quic
