@@ -64,8 +64,8 @@ const slots = useSlots()
 
 <template>
   <Switch v-bind="omit(props, ['value'])" v-model:checked="value">
-    <template v-for="slotName in Object.keys(slots)" v-slot:[slotName]>
-      <slot :name="slotName"></slot>
+    <template v-for="slotName in Object.keys(slots)" v-slot:[slotName]="scopeParams">
+      <slot :name="slotName" v-bind="scopeParams"></slot>
     </template>
   </Switch>
 </template>
@@ -88,8 +88,8 @@ const value = defineModel('value', {
 
 <template>
   <Switch v-bind="omit(props, ['value'])" v-model:checked="value">
-    <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]>
-      <slot :name="slotName"></slot>
+    <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="scopeParams">
+      <slot :name="slotName" v-bind="scopeParams"></slot>
     </template>
   </Switch>
 </template>
